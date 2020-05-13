@@ -11,4 +11,4 @@ let config = {
 let game = new Phaser.Game(config);
 
 //key input read
-let keyUp, keyDown, keyLeft, keyRight;
+let keyUp, keyDown, keyLeft, keyRight, keyF;
