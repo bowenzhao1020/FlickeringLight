@@ -22,6 +22,22 @@ class Play extends Phaser.Scene{
 
         this.cameras.main.startFollow(this.player);
 
+        //physics implement
+        this.physics.add.existing(this.player);
+        this.physics.add.existing(this.A);
+        this.physics.add.existing(this.B);
+        this.physics.add.existing(this.C);
+
+        this.player.body.collideWorldBounds = true;
+
+        this.A.body.setImmovable(true);
+        this.B.body.setImmovable(true);
+        this.C.body.setImmovable(true);
+
+        this.A.body.onCollide = true;
+        this.B.body.onCollide = true;
+        this.C.body.onCollide = true;
+
         //key inputs
         keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -31,23 +47,27 @@ class Play extends Phaser.Scene{
 
     update(){
         if(keyLeft.isDown){
-            this.player.body.setVelocityX(-100);
+            this.player.body.setVelocityX(-150);
         }
         else if(keyRight.isDown){
-            this.player.body.setVelocityX(100);
+            this.player.body.setVelocityX(150);
         }
         else{
             this.player.body.setVelocityX(0);
         }
 
         if(keyUp.isDown){
-            this.player.body.setVelocityY(-100);
+            this.player.body.setVelocityY(-150);
         }
         else if(keyDown.isDown){
-            this.player.body.setVelocityY(100);
+            this.player.body.setVelocityY(150);
         }
         else{
             this.player.body.setVelocityY(0);
         }
+
+        this.physics.collide(this.A, this.player);
+        this.physics.collide(this.B, this.player);
+        this.physics.collide(this.C, this.player);
     }
 }
