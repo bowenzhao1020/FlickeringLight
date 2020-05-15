@@ -43,6 +43,7 @@ class Play extends Phaser.Scene{
         keyRight  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     }
 
     update(){
@@ -69,5 +70,10 @@ class Play extends Phaser.Scene{
         this.physics.collide(this.A, this.player);
         this.physics.collide(this.B, this.player);
         this.physics.collide(this.C, this.player);
+
+        if(Phaser.Input.Keyboard.JustDown(keyF)){
+            console.log('touched');
+            this.A.setVisible(false);
+        }
     }
 }
