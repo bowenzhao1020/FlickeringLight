@@ -22,6 +22,7 @@ class Play extends Phaser.Scene{
         this.C = this.physics.add.sprite(centerX + 200, centerY + 150, 'C').setOrigin(0.5, 0.5);
 
         this.txt = this.add.sprite(402.5, 150, 'txt').setOrigin(0.5);
+        this.txt.setVisible(false);
 
         cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
 
@@ -79,11 +80,14 @@ class Play extends Phaser.Scene{
         this.physics.collide(this.B, this.player);
         this.physics.collide(this.C, this.player);
 
-        if(Phaser.Input.Keyboard.JustDown(keyF)){
-            console.log('touched');
-            this.A.setVisible(false);
+        if(Phaser.Input.Keyboard.JustDown(keyF) && this.txt.setVisible(false)){
+            this.txt.setVisible(true);
+        }
+        else if(Phaser.Input.Keyboard.JustDown(keyF) && this.txt.setVisible(true)){
+            this.txt.setVisible(false);
         }
 
         this.txt.setScrollFactor(0);
+        
     }
 }
