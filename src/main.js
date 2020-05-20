@@ -1,6 +1,6 @@
 let config = {
     type: Phaser.AUTO,
-    width: 600,
+    width: 800,
     height: 800,
     scale:{
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -27,6 +27,9 @@ let keyUp, keyDown, keyLeft, keyRight, keyF;
 //value var
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
+
+//custom world bounds
+let cstBounds;
 
 //game over var
 let gameOver = false;

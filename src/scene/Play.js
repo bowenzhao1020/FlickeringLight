@@ -9,6 +9,7 @@ class Play extends Phaser.Scene{
         this.load.image('A', "./assets/A.png");
         this.load.image('B', "./assets/B.png");
         this.load.image('C', "./assets/C.png");
+        this.load.image('txt', './assets/Textbox.png');
         
     }
 
@@ -20,7 +21,12 @@ class Play extends Phaser.Scene{
         this.B = this.physics.add.sprite(centerX, centerY - 200 , 'B').setOrigin(0.5, 0.5);
         this.C = this.physics.add.sprite(centerX + 200, centerY + 150, 'C').setOrigin(0.5, 0.5);
 
+        this.txt = this.add.sprite(402.5, 150, 'txt').setOrigin(0.5);
+
+        cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
+
         this.cameras.main.startFollow(this.player);
+        this.cameras.main.setBounds(0, 0, 3200, 3200);
 
         //physics implement
         this.physics.add.existing(this.player);
@@ -38,6 +44,8 @@ class Play extends Phaser.Scene{
         this.B.body.onCollide = true;
         this.C.body.onCollide = true;
 
+
+
         //key inputs
         keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -48,20 +56,20 @@ class Play extends Phaser.Scene{
 
     update(){
         if(keyLeft.isDown){
-            this.player.body.setVelocityX(-150);
+            this.player.body.setVelocityX(-500);
         }
         else if(keyRight.isDown){
-            this.player.body.setVelocityX(150);
+            this.player.body.setVelocityX(500);
         }
         else{
             this.player.body.setVelocityX(0);
         }
 
         if(keyUp.isDown){
-            this.player.body.setVelocityY(-150);
+            this.player.body.setVelocityY(-500);
         }
         else if(keyDown.isDown){
-            this.player.body.setVelocityY(150);
+            this.player.body.setVelocityY(500);
         }
         else{
             this.player.body.setVelocityY(0);
@@ -75,5 +83,7 @@ class Play extends Phaser.Scene{
             console.log('touched');
             this.A.setVisible(false);
         }
+
+        this.txt.setScrollFactor(0);
     }
 }
