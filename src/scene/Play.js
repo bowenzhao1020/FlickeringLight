@@ -10,12 +10,21 @@ class Play extends Phaser.Scene{
         this.load.image('B', "./assets/B.png");
         this.load.image('C', "./assets/C.png");
         this.load.image('txt', './assets/Textbox.png');
+
+        //tile map needs
+        this.load.image('dirt', './assets/Dirt.png');
+        this.load.image('tree', './assets/Tree.png');
+        this.load.image('grass', './assets/Grassland.png');
+
+        //json file load
+        
         
     }
 
     create(){
         
         //game world tile
+
 
         //player sprite implement
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setOrigin(0.5, 0.5);
