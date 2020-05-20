@@ -15,17 +15,22 @@ class Play extends Phaser.Scene{
 
     create(){
         
+        //game world tile
+
+        //player sprite implement
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setOrigin(0.5, 0.5);
 
+        //demo used npc sprite
         this.A = this.physics.add.sprite(centerX - 200, centerY + 100, 'A').setOrigin(0.5, 0.5);
         this.B = this.physics.add.sprite(centerX, centerY - 200 , 'B').setOrigin(0.5, 0.5);
         this.C = this.physics.add.sprite(centerX + 200, centerY + 150, 'C').setOrigin(0.5, 0.5);
 
+
+        //txt box sprite
         this.txt = this.add.sprite(402.5, 150, 'txt').setOrigin(0.5);
         this.txt.setVisible(false);
 
-        cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
-
+        //main camera setting
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setBounds(0, 0, 3200, 3200);
 
@@ -35,8 +40,12 @@ class Play extends Phaser.Scene{
         this.physics.add.existing(this.B);
         this.physics.add.existing(this.C);
 
+        //custom player moving bounds for later tile implement
+        cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
         this.player.body.collideWorldBounds = true;
+        this.player.body.setBoundsRectangle(cstBounds);
 
+        //NPC sprite physics
         this.A.body.setImmovable(true);
         this.B.body.setImmovable(true);
         this.C.body.setImmovable(true);
@@ -56,6 +65,8 @@ class Play extends Phaser.Scene{
     }
 
     update(){
+
+        //player movement setting
         if(keyLeft.isDown){
             this.player.body.setVelocityX(-500);
         }
@@ -76,10 +87,12 @@ class Play extends Phaser.Scene{
             this.player.body.setVelocityY(0);
         }
 
+        //player collision with NPC sprite
         this.physics.collide(this.A, this.player);
         this.physics.collide(this.B, this.player);
         this.physics.collide(this.C, this.player);
 
+        //text box alpha change
         if(Phaser.Input.Keyboard.JustDown(keyF) && this.txt.setVisible(false)){
             this.txt.setVisible(true);
         }
@@ -87,6 +100,7 @@ class Play extends Phaser.Scene{
             this.txt.setVisible(false);
         }
 
+        //text box follow camera
         this.txt.setScrollFactor(0);
         
     }

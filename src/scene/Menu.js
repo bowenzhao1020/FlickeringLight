@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene{
     }
 
     create(){
+        //menu display
         let menuConfig = {
             fontFamily: 'Arial',
             fontSize: '50px',
@@ -41,6 +42,7 @@ class Menu extends Phaser.Scene{
     }
 
     update(){
+        // play scene change
         if(this.key.isDown){
             this.scene.start("playScene");
         }
