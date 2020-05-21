@@ -14,10 +14,10 @@ class Play extends Phaser.Scene{
         //tile map needs
         this.load.image('dirt', './assets/Dirt.png');
         this.load.image('tree', './assets/Tree.png');
-        this.load.image('grass', './assets/Grassland.png');
+        this.load.image('grass', './assets/Grass.png');
 
         //json file load
-        
+        this.load.tilemapTiledJSON('map', './assets/Tilemap.json');
         
     }
 
@@ -71,7 +71,16 @@ class Play extends Phaser.Scene{
         keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+    
+        map = this.add.tilemap('map');
+
+        grass =  map.addTilesetImage('Dirt', 'dirt');
+        dirt = map.addTilesetImage('Tree', 'tree');
+        tree = map.addTilesetImage('Grass', 'grass');
+
+
     }
+
 
     update(){
 

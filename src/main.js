@@ -31,5 +31,11 @@ let centerY = game.config.height/2;
 //custom world bounds
 let cstBounds;
 
+//tile map
+let map, dirt, grass, tree;
+
+//tile layer
+let botLay, topLay;
+
 //game over var
 let gameOver = false;
