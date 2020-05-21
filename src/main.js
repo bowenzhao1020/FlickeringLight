@@ -35,7 +35,7 @@ let cstBounds;
 let map, dirt, grass, tree;
 
 //tile layer
-let botLay, topLay;
+let dirtLay, grassLay, treeLay;
 
 //game over var
 let gameOver = false;

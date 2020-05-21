@@ -36,8 +36,11 @@ class Play extends Phaser.Scene{
 
 
         //txt box sprite
-        this.txt = this.add.sprite(402.5, 150, 'txt').setOrigin(0.5);
-        this.txt.setVisible(false);
+        this.txtTop = this.add.sprite(402.5, 150, 'txt').setOrigin(0.5);
+        this.txtTop.setVisible(false);
+
+        //this.txtBot = this.add.sprite(402.5, 650, 'txt').setOrigin(0.5);
+        //this.txtBot.setVisible(false);
 
         //main camera setting
         this.cameras.main.startFollow(this.player);
@@ -72,11 +75,17 @@ class Play extends Phaser.Scene{
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     
-        map = this.add.tilemap('map');
+        // map = this.add.tilemap('map');
 
-        grass =  map.addTilesetImage('Dirt', 'dirt');
-        dirt = map.addTilesetImage('Tree', 'tree');
-        tree = map.addTilesetImage('Grass', 'grass');
+        // dirt = map.addTilesetImage('Tree', 'tree');
+        // grass =  map.addTilesetImage('Dirt', 'dirt');
+        // tree = map.addTilesetImage('Grass', 'grass');
+
+        // //layer adding
+        // dirtLay = map.createStaticLayer('Dirt', [dirt], 0, 0);
+        // grassLay = map.createStaticLayer('Grass', [grass], 0, 0);
+        // treeLay = map.createStaticLayer('Tree', [tree], 0, 0);
+
 
 
     }
@@ -111,15 +120,33 @@ class Play extends Phaser.Scene{
         this.physics.collide(this.C, this.player);
 
         //text box alpha change
-        if(Phaser.Input.Keyboard.JustDown(keyF) && this.txt.setVisible(false)){
-            this.txt.setVisible(true);
+        // NPC A
+        if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.A.x) <= 75 && Math.abs(this.player.y - this.A.y) <= 75){
+            this.txtTop.setVisible(true);
         }
-        else if(Phaser.Input.Keyboard.JustDown(keyF) && this.txt.setVisible(true)){
-            this.txt.setVisible(false);
+        else if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
+            this.txtTop.setVisible(false);
         }
 
+        //NPC B
+        // if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
+        //     this.txtBot.setVisible(true);
+        // }
+        // else if((Math.abs(this.player.x - this.B.x) > 75 || Math.abs(this.player.y - this.B.y) > 75)){
+        //     this.txtBot.setVisible(false);
+        // }
+        
+        //NPC C
+        // if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
+        //     this.txtTop.setVisible(true);
+        // }
+        // else if((Math.abs(this.player.x - this.C.x) > 75 || Math.abs(this.player.y - this.C.y) > 75)){
+        //     this.txtTop.setVisible(false);
+        // }
+
         //text box follow camera
-        this.txt.setScrollFactor(0);
+        this.txtTop.setScrollFactor(0);
+        //this.txtBot.setScrollFactor(0);
         
     }
 }
