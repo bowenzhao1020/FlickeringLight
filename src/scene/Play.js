@@ -5,19 +5,22 @@ class Play extends Phaser.Scene{
 
     preload(){
 
-        this.load.image('player', "./assets/player.png");
+        this.load.image('player', "./assets/Character.png");
         this.load.image('A', "./assets/A.png");
         this.load.image('B', "./assets/B.png");
         this.load.image('C', "./assets/C.png");
         this.load.image('txt', './assets/Textbox.png');
 
         //tile map needs
-        this.load.image('dirt', './assets/Dirt.png');
-        this.load.image('tree', './assets/Tree.png');
-        this.load.image('grass', './assets/Grass.png');
+        this.load.image('Dirt',   './assets/Dirt.png');
+        this.load.image('Tree',   './assets/Tree.png');
+        this.load.image('Grass',  './assets/Grass.png');
+        this.load.image('Rock',   './assets/Rock.png');
+        this.load.image('Water',  './assets/Water.png');
+        this.load.image('Plants', './assets/Plants.png');
 
         //json file load
-        this.load.tilemapTiledJSON('map', './assets/Tilemap.json');
+        this.load.tilemapTiledJSON('Gmap', './assets/GameMap.json');
         
     }
 
@@ -25,6 +28,20 @@ class Play extends Phaser.Scene{
         
         //game world tile
 
+        Gmap = this.add.tilemap('Gmap');
+
+        dirt   = Gmap.addTilesetImage('Dirt');
+        grass  = Gmap.addTilesetImage('Grass');
+        tree   = Gmap.addTilesetImage('Tree');
+        plants = Gmap.addTilesetImage('Plants');
+        water  = Gmap.addTilesetImage('Water');
+        rock   = Gmap.addTilesetImage('Rock');
+
+        // //layer adding
+        dirtLay  = Gmap.createStaticLayer('Dirt',    [dirt, water], 0, 0);
+        grassLay = Gmap.createStaticLayer('Grass',   [grass], 0, 0);
+        objLay   = Gmap.createStaticLayer('Object',  [tree, rock, plants], 0, 0);
+        obj2Lay  = Gmap.createStaticLayer('Object2', [tree, rock, plants], 0, 0);
 
         //player sprite implement
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setOrigin(0.5, 0.5);
@@ -36,11 +53,8 @@ class Play extends Phaser.Scene{
 
 
         //txt box sprite
-        this.txtTop = this.add.sprite(402.5, 150, 'txt').setOrigin(0.5);
-        this.txtTop.setVisible(false);
-
-        //this.txtBot = this.add.sprite(402.5, 650, 'txt').setOrigin(0.5);
-        //this.txtBot.setVisible(false);
+        this.txt = this.add.sprite(402.5, 650, 'txt').setOrigin(0.5);
+        this.txt.setVisible(false);
 
         //main camera setting
         this.cameras.main.startFollow(this.player);
@@ -74,19 +88,6 @@ class Play extends Phaser.Scene{
         keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-    
-        // map = this.add.tilemap('map');
-
-        // dirt = map.addTilesetImage('Tree', 'tree');
-        // grass =  map.addTilesetImage('Dirt', 'dirt');
-        // tree = map.addTilesetImage('Grass', 'grass');
-
-        // //layer adding
-        // dirtLay = map.createStaticLayer('Dirt', [dirt], 0, 0);
-        // grassLay = map.createStaticLayer('Grass', [grass], 0, 0);
-        // treeLay = map.createStaticLayer('Tree', [tree], 0, 0);
-
-
 
     }
 
@@ -122,10 +123,10 @@ class Play extends Phaser.Scene{
         //text box alpha change
         // NPC A
         if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.A.x) <= 75 && Math.abs(this.player.y - this.A.y) <= 75){
-            this.txtTop.setVisible(true);
+            this.txt.setVisible(true);
         }
         else if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
-            this.txtTop.setVisible(false);
+            this.txt.setVisible(false);
         }
 
         //NPC B
@@ -145,8 +146,7 @@ class Play extends Phaser.Scene{
         // }
 
         //text box follow camera
-        this.txtTop.setScrollFactor(0);
-        //this.txtBot.setScrollFactor(0);
+        this.txt.setScrollFactor(0);
         
     }
 }

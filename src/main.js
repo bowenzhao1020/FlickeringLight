@@ -32,10 +32,10 @@ let centerY = game.config.height/2;
 let cstBounds;
 
 //tile map
-let map, dirt, grass, tree;
+let Gmap, dirt, grass, tree, plants, water, rock;
 
 //tile layer
-let dirtLay, grassLay, treeLay;
+let dirtLay, grassLay, objLay, obj2Lay;
 
 //game over var
 let gameOver = false;
