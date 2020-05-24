@@ -96,7 +96,7 @@ class Play extends Phaser.Scene{
 
         //player movement setting
         if(keyLeft.isDown){
-
+            this.player.setFlipX(false);
             this.player.body.setVelocityX(-500);
         }
         else if(keyRight.isDown){
@@ -104,7 +104,6 @@ class Play extends Phaser.Scene{
             this.player.body.setVelocityX(500);
         }
         else{
-            this.player.setFlipX(false);
             this.player.body.setVelocityX(0);
         }
 
@@ -132,21 +131,21 @@ class Play extends Phaser.Scene{
             this.txt.setVisible(false);
         }
 
-        //NPC B
-        // if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
-        //     this.txtBot.setVisible(true);
-        // }
-        // else if((Math.abs(this.player.x - this.B.x) > 75 || Math.abs(this.player.y - this.B.y) > 75)){
-        //     this.txtBot.setVisible(false);
-        // }
+        // NPC B
+        if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
+            this.txt.setVisible(true);
+        }
+        else if((Math.abs(this.player.x - this.B.x) > 75 || Math.abs(this.player.y - this.B.y) > 75)){
+            this.txt.setVisible(false);
+        }
         
-        //NPC C
-        // if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
-        //     this.txtTop.setVisible(true);
-        // }
-        // else if((Math.abs(this.player.x - this.C.x) > 75 || Math.abs(this.player.y - this.C.y) > 75)){
-        //     this.txtTop.setVisible(false);
-        // }
+        // NPC C
+        if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
+            this.txt.setVisible(true);
+        }
+        else if((Math.abs(this.player.x - this.C.x) > 75 || Math.abs(this.player.y - this.C.y) > 75)){
+            this.txt.setVisible(false);
+        }
 
         //text box follow camera
         this.txt.setScrollFactor(0);
