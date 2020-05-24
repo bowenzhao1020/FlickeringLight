@@ -41,7 +41,7 @@ class Play extends Phaser.Scene{
         dirtLay  = Gmap.createStaticLayer('Dirt',    [dirt, water], 0, 0);
         grassLay = Gmap.createStaticLayer('Grass',   [grass], 0, 0);
         objLay   = Gmap.createStaticLayer('Object',  [tree, rock, plants], 0, 0);
-        obj2Lay  = Gmap.createStaticLayer('Object2', [tree, rock, plants], 0, 0);
+        obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0);
 
         //player sprite implement
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setOrigin(0.5, 0.5);
@@ -96,12 +96,15 @@ class Play extends Phaser.Scene{
 
         //player movement setting
         if(keyLeft.isDown){
+
             this.player.body.setVelocityX(-500);
         }
         else if(keyRight.isDown){
+            this.player.setFlipX(true);
             this.player.body.setVelocityX(500);
         }
         else{
+            this.player.setFlipX(false);
             this.player.body.setVelocityX(0);
         }
 

@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "target":"."
+         "format":"json",
+         "target":"GameMap.json"
         }
     },
  "height":100,
