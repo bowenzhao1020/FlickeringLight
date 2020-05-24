@@ -37,5 +37,8 @@ let Gmap, dirt, grass, tree, plants, water, rock;
 //tile layer
 let dirtLay, grassLay, objLay, obj2Lay;
 
+//Dialog display
+let dialogue;
+
 //game over var
 let gameOver = false;

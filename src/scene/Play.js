@@ -25,9 +25,30 @@ class Play extends Phaser.Scene{
     }
 
     create(){
+
+        //key inputs
+        keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRight  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+
+        //dialogue config
+        let chatConfig = {
+            fontFamily: 'Arial',
+            fontSize: '25px',
+            color: '#FFFFFF',
+            align: 'Left',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+
         
         //game world tile
-
         Gmap = this.add.tilemap('Gmap');
 
         dirt   = Gmap.addTilesetImage('Dirt');
@@ -80,14 +101,8 @@ class Play extends Phaser.Scene{
         this.B.body.onCollide = true;
         this.C.body.onCollide = true;
 
-
-
-        //key inputs
-        keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRight  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        //for text displace following camera test
+        dialogue = this.add.text(centerX, centerY, 'Ello ello', chatConfig).setOrigin(0.5);
 
     }
 
@@ -126,29 +141,39 @@ class Play extends Phaser.Scene{
         // NPC A
         if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.A.x) <= 75 && Math.abs(this.player.y - this.A.y) <= 75){
             this.txt.setVisible(true);
-        }
-        else if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
-            this.txt.setVisible(false);
-        }
-
-        // NPC B
-        if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
-            this.txt.setVisible(true);
-        }
-        else if((Math.abs(this.player.x - this.B.x) > 75 || Math.abs(this.player.y - this.B.y) > 75)){
-            this.txt.setVisible(false);
+            if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
+                this.txt.setVisible(false);
+            }
+            
         }
         
+        // else if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
+        //     this.txt.setVisible(true);
+        // }
+        // else if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
+        //     this.txt.setVisible(true);
+        // }
+        // else if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
+        //     this.txt.setVisible(false);
+        // }
+
+        // NPC B
+        // if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
+        //     this.txt.setVisible(true);
+        // }
+        // else if((Math.abs(this.player.x - this.B.x) > 75 || Math.abs(this.player.y - this.B.y) > 75)){
+        //     this.txt.setVisible(false);
+        // }
+        
         // NPC C
-        if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
-            this.txt.setVisible(true);
-        }
-        else if((Math.abs(this.player.x - this.C.x) > 75 || Math.abs(this.player.y - this.C.y) > 75)){
-            this.txt.setVisible(false);
-        }
+        // if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
+        //     this.txt.setVisible(true);
+        // }
+
 
         //text box follow camera
         this.txt.setScrollFactor(0);
+        dialogue.setScrollFactor(0);
         
     }
 }
