@@ -22,7 +22,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 //key input read
-let keyUp, keyDown, keyLeft, keyRight, keyF;
+let keyUp, keyDown, keyLeft, keyRight, keyF, keySpace;
 
 //value var
 let centerX = game.config.width/2;
@@ -36,9 +36,6 @@ let Gmap, dirt, grass, tree, plants, water, rock;
 
 //tile layer
 let dirtLay, grassLay, objLay, obj2Lay;
-
-//Dialog display
-let dialogue;
 
 //game over var
 let gameOver = false;

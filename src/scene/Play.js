@@ -6,9 +6,9 @@ class Play extends Phaser.Scene{
     preload(){
 
         this.load.image('player', "./assets/Character.png");
-        this.load.image('A', "./assets/A.png");
-        this.load.image('B', "./assets/B.png");
-        this.load.image('C', "./assets/C.png");
+        this.load.image('fast', "./assets/A.png");
+        this.load.image('normal', "./assets/B.png");
+        this.load.image('bomb', "./assets/C.png");
         this.load.image('txt', './assets/Textbox.png');
 
         //tile map needs
@@ -32,6 +32,7 @@ class Play extends Phaser.Scene{
         keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keySpace  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         //dialogue config
         let chatConfig = {
@@ -65,12 +66,12 @@ class Play extends Phaser.Scene{
         obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0);
 
         //player sprite implement
-        this.player = this.physics.add.sprite(centerX, centerY, 'player').setOrigin(0.5, 0.5);
+        this.player = this.physics.add.sprite(1600, 1600, 'player').setOrigin(0.5, 0.5);
 
         //demo used npc sprite
-        this.A = this.physics.add.sprite(centerX - 200, centerY + 100, 'A').setOrigin(0.5, 0.5);
-        this.B = this.physics.add.sprite(centerX, centerY - 200 , 'B').setOrigin(0.5, 0.5);
-        this.C = this.physics.add.sprite(centerX + 200, centerY + 150, 'C').setOrigin(0.5, 0.5);
+        this.A = this.physics.add.sprite(centerX - 200, centerY + 100, 'fast').setOrigin(0.5, 0.5);
+        this.B = this.physics.add.sprite(centerX, centerY - 200 , 'normal').setOrigin(0.5, 0.5);
+        this.C = this.physics.add.sprite(centerX + 200, centerY + 150, 'bomb').setOrigin(0.5, 0.5);
 
 
         //txt box sprite
@@ -101,8 +102,6 @@ class Play extends Phaser.Scene{
         this.B.body.onCollide = true;
         this.C.body.onCollide = true;
 
-        //for text displace following camera test
-        dialogue = this.add.text(centerX, centerY, 'Ello ello', chatConfig).setOrigin(0.5);
 
     }
 
@@ -132,48 +131,16 @@ class Play extends Phaser.Scene{
             this.player.body.setVelocityY(0);
         }
 
+        if(keySpace)
+
         //player collision with NPC sprite
         this.physics.collide(this.A, this.player);
         this.physics.collide(this.B, this.player);
         this.physics.collide(this.C, this.player);
 
-        //text box alpha change
-        // NPC A
-        if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.A.x) <= 75 && Math.abs(this.player.y - this.A.y) <= 75){
-            this.txt.setVisible(true);
-            if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
-                this.txt.setVisible(false);
-            }
-            
-        }
-        
-        // else if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
-        //     this.txt.setVisible(true);
-        // }
-        // else if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
-        //     this.txt.setVisible(true);
-        // }
-        // else if((Math.abs(this.player.x - this.A.x) > 75 || Math.abs(this.player.y - this.A.y) > 75)){
-        //     this.txt.setVisible(false);
-        // }
-
-        // NPC B
-        // if(Phaser.Input.Keyboard.JustDown(keyF) && Math.abs(this.player.x - this.B.x) <= 75 && Math.abs(this.player.y - this.B.y) <= 75){
-        //     this.txt.setVisible(true);
-        // }
-        // else if((Math.abs(this.player.x - this.B.x) > 75 || Math.abs(this.player.y - this.B.y) > 75)){
-        //     this.txt.setVisible(false);
-        // }
-        
-        // NPC C
-        // if(Phaser.Input.Keyboard.JustDown(keyF) && (Math.abs(this.player.x - this.C.x) <= 75 && Math.abs(this.player.y - this.C.y) <= 75)){
-        //     this.txt.setVisible(true);
-        // }
-
 
         //text box follow camera
         this.txt.setScrollFactor(0);
-        dialogue.setScrollFactor(0);
         
     }
 }
