@@ -24,6 +24,9 @@ let game = new Phaser.Game(config);
 //key input read
 let keyUp, keyDown, keyLeft, keyRight, keyF, keySpace;
 
+//skill var
+let boom, slash, spin;
+
 //value var
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
