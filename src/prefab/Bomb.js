@@ -24,6 +24,8 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
     }
 
     activate(){
+        bombNum -= 1;
+        this.scene.bombUI.text = 'Bomb: ' + bombNum;
         this.isCreate = true;
         this.setVisible(true);
     }

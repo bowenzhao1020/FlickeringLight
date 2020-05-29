@@ -43,7 +43,7 @@ let Gmap, dirt, grass, tree, plants, water, rock;
 let dirtLay, grassLay, objLay, obj2Lay;
 
 //player skill key
-//let slashKey, bombKey;
+let bombNum = 10;
 
 //game over var
 let gameOver = false;

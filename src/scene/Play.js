@@ -25,6 +25,20 @@ class Play extends Phaser.Scene{
 
     create(){
 
+        let bombConfig = {
+            fontFamily: 'Arial',
+            fontSize: '30px',
+            color: '#000000',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        
+        this.bombUI = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, bombConfig).setOrigin(0.5);
+
         //key inputs
         keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -33,18 +47,6 @@ class Play extends Phaser.Scene{
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keySpace  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        //dialogue config
-        let chatConfig = {
-            fontFamily: 'Arial',
-            fontSize: '25px',
-            color: '#FFFFFF',
-            align: 'Left',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
         
         //game world tile
         Gmap = this.add.tilemap('Gmap');
@@ -57,10 +59,10 @@ class Play extends Phaser.Scene{
         rock   = Gmap.addTilesetImage('Rock');
 
         // //layer adding
-        dirtLay  = Gmap.createStaticLayer('Dirt',    [dirt, water], 0, 0);
-        grassLay = Gmap.createStaticLayer('Grass',   [grass], 0, 0);
-        objLay   = Gmap.createStaticLayer('Object',  [tree, rock, plants], 0, 0);
-        obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0);
+        dirtLay  = Gmap.createStaticLayer('Dirt',    [dirt, water], 0, 0).setDepth(-1);
+        grassLay = Gmap.createStaticLayer('Grass',   [grass], 0, 0).setDepth(-1);
+        objLay   = Gmap.createStaticLayer('Object',  [tree, rock, plants], 0, 0).setDepth(-1);
+        obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0).setDepth(-1);
 
         //player sprite implement
         this.player = new Player(this, spawnX, spawnY, 'player').setOrigin(0.5);
@@ -117,6 +119,9 @@ class Play extends Phaser.Scene{
 
 
     update(){
+
+        //UI display
+        this.bombUI.setScrollFactor(0);
 
         this.player.update();
         if(this.enemy){
