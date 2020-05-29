@@ -89,7 +89,7 @@ class Play extends Phaser.Scene{
 
         //bomb group create()
         this.bombs = this.physics.add.group();
-        this
+        //this
         
         //main camera setting
         this.cameras.main.startFollow(this.player);
@@ -130,7 +130,7 @@ class Play extends Phaser.Scene{
             
             this.boom0.reset();
             console.log('reset boom 0');
-            this.enemy.destroy();
+            //this.enemy.destroy();
         }
         if(this.physics.collide(this.enemy, this.boom1)){
             
