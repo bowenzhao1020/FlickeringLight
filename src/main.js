@@ -30,6 +30,8 @@ let boom, slash, spin;
 //value var
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
+let spawnX  = 1600;
+let spawnY  = 1600;
 
 //custom world bounds
 let cstBounds;
@@ -39,6 +41,9 @@ let Gmap, dirt, grass, tree, plants, water, rock;
 
 //tile layer
 let dirtLay, grassLay, objLay, obj2Lay;
+
+//player skill key
+//let slashKey, bombKey;
 
 //game over var
 let gameOver = false;

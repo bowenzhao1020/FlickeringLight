@@ -7,13 +7,15 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
 
         this.hp = 2;
 
+        
+
     }
 
     update(){
 
         this.body.setImmovable(true);
         this.body.onCollide = true;
-        this.moveTo(this, 1600, 1600, 200);
+        this.moveTo(this, 1300, 1300, 200);
         
     }
 
@@ -41,5 +43,9 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
         if(this.hp == 0){
             this.destroy();
         }
+    }
+
+    death(){
+        this.destroy();
     }
 }
