@@ -25,7 +25,7 @@ class Play extends Phaser.Scene{
 
     create(){
 
-        let bombConfig = {
+        let displayConfig = {
             fontFamily: 'Arial',
             fontSize: '30px',
             color: '#000000',
@@ -37,7 +37,11 @@ class Play extends Phaser.Scene{
             fixedWidth: 0
         }
         
-        this.bombUI = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, bombConfig).setOrigin(0.5);
+        this.bombUI = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
+        console.log(this.bombUI.x);
+        this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
+        console.log(this.enemyUI.x);
+
 
         //key inputs
         keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -89,23 +93,27 @@ class Play extends Phaser.Scene{
         this.boom9 = new Bomb(this, this.player.x, this.player.y, 'bomb').setOrigin(0.5);
         this.boom9.reset();
 
-        //bomb group create()
-        this.bombs = this.physics.add.group();
-        //this
-        
+        //enemy sprites
+        this.enemy0 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy1 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy2 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy3 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy4 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy5 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy6 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy7 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+
         //main camera setting
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setBounds(0, 0, 3200, 3200);
 
-        //demo used npc sprite
-        
-        this.enemy = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+
 
         //physics implement
         this.physics.add.existing(this.player);
 
         //enemy physics
-        this.physics.add.existing(this.enemy);
+        this.physics.add.existing(this.enemy0);
 
         //bomb physics
 
@@ -122,78 +130,79 @@ class Play extends Phaser.Scene{
 
         //UI display
         this.bombUI.setScrollFactor(0);
+        this.enemyUI.setScrollFactor(0);
 
         this.player.update();
-        if(this.enemy){
-            this.enemy.update();
+        if(!this.enemy0.dead){
+            this.enemy0.update();
         }
 
 
 
-        this.physics.collide(this.player, this.enemy);
-        if(this.physics.collide(this.enemy, this.boom0)){
+        this.physics.overlap(this.player, this.enemy0);
+        if(this.physics.collide(this.enemy0, this.boom0)){
             
             this.boom0.reset();
             console.log('reset boom 0');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom1)){
+        if(this.physics.collide(this.enemy0, this.boom1)){
             
             this.boom1.reset();
             console.log('reset boom 1');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom2)){
+        if(this.physics.collide(this.enemy0, this.boom2)){
             
             this.boom2.reset();
             console.log('reset boom 2');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom3)){
+        if(this.physics.collide(this.enemy0, this.boom3)){
             
             this.boom3.reset();
             console.log('reset boom 3');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom4)){
+        if(this.physics.collide(this.enemy0, this.boom4)){
             
             this.boom4.reset();
             console.log('reset boom 4');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom5)){
+        if(this.physics.collide(this.enemy0, this.boom5)){
             
             this.boom5.reset();
             console.log('reset boom 5');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom6)){
+        if(this.physics.collide(this.enemy0, this.boom6)){
             
             this.boom6.reset();
             console.log('reset boom 6');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom7)){
+        if(this.physics.collide(this.enemy0, this.boom7)){
             
             this.boom7.reset();
             console.log('reset boom 7');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom8)){
+        if(this.physics.collide(this.enemy0, this.boom8)){
             
             this.boom8.reset();
             console.log('reset boom 8');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy, this.boom9)){
+        if(this.physics.collide(this.enemy0, this.boom9)){
             
             this.boom9.reset();
             console.log('reset boom 9');
-            //this.enemy.destroy();
+            this.enemy0.death();
         }
         
 
-        if(Phaser.Input.Keyboard.JustDown(keySpace)){
+        if(Phaser.Input.Keyboard.JustDown(keySpace) && bombNum > 0){
             if(this.boom0.isCreate == false){
                 console.log('boom0');
                 this.setBomb(this.boom0);

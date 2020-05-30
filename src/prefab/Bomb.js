@@ -6,9 +6,8 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this);
 
         this.scene.physics.add.existing(this);
-        this.body.setImmovable(true);
-        this.body.onCollide = false;
-
+        this.setImmovable(true);
+        this.body.onCollide = true;
         this.isCreate = false;
     }
 

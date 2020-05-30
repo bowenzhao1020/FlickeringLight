@@ -5,9 +5,11 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
         //add to existing, displayList, updateList
         scene.add.existing(this);
 
+        this.scene.physics.add.existing(this);
+
         this.hp = 2;
 
-        
+        this.dead = false;
 
     }
 
@@ -19,7 +21,7 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
         
     }
 
-    //move to function implemented
+    //moveTo function implemented from Phaser 3 official funtion 
     moveTo (gameObject, x, y, speed, maxTime)
     {
         if (speed === undefined) { speed = 60; }
@@ -38,14 +40,27 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
         return angle;
     }
 
+    //dmg function for get hit
     getHit(){
         this.hp -= 1;
         if(this.hp == 0){
-            this.destroy();
+            this.death();
         }
     }
 
+    //check death function
     death(){
-        this.destroy();
+        this.dead = true;
+        this.x = -100;
+        this.y = -100;
+        // this.body.velocity.x = 0;
+        // this.body.velocity.y = 0;
+        this.setVisible(false);
+    }
+
+    reset(){
+        this.x = 100;
+        this.y = 100;
+
     }
 }
