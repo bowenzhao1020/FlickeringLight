@@ -17,7 +17,7 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
 
         this.body.setImmovable(true);
         this.body.onCollide = true;
-        this.moveTo(this, 1300, 1300, 200);
+        this.moveTo(this, 1600, 1600, 200);
         
     }
 

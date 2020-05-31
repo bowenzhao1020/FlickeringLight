@@ -15,8 +15,8 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
     }
 
     reset(){
-        this.x = spawnX;
-        this.y = spawnY;
+        this.x = -200;
+        this.y = -200;
         this.isCreate = false;
         this.setVisible(false);
     }

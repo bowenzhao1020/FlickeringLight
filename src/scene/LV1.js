@@ -133,11 +133,17 @@ class LV1 extends Phaser.Scene{
         //physics implement
         this.physics.add.existing(this.player);
 
-        //enemy physics
-        this.physics.add.existing(this.enemy0);
+        //enemy group
+        this.enemies = this.physics.add.group({ classType: Normal,});
 
         //bomb physics
+        this.bombs = this.physics.add.group( {classType: Bomb} );
 
+        //collider
+        this.physics.add.collider(this.enemies, this.bombs, function(enemy, bomb){
+            enemy.death();
+            bomb.reset();
+        })
 
         //custom player moving bounds for later tile implement
         cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
@@ -155,71 +161,95 @@ class LV1 extends Phaser.Scene{
 
         //player update
         this.player.update();
-        if(!this.enemy0.dead){
-            this.enemy0.update();
+        if(enemySum > 0)
+        {
+            if(!this.enemy0.dead){
+                this.enemy0.update();
+            }
+            if(!this.enemy1.dead){
+                this.enemy1.update();
+            }
+            if(!this.enemy2.dead){
+                this.enemy2.update();
+            }
+            if(!this.enemy3.dead){
+                this.enemy3.update();
+            }
+            if(!this.enemy4.dead){
+                this.enemy4.update();
+            }
+            if(!this.enemy5.dead){
+                this.enemy5.update();
+            }
+            if(!this.enemy6.dead){
+                this.enemy6.update();
+            }
+            if(!this.enemy7.dead){
+                this.enemy7.update();
+            }
         }
 
         this.physics.overlap(this.player, this.enemy0);
+        this.physics.overlap(this.player, this.enemy1);
+        this.physics.overlap(this.player, this.enemy2);
+        this.physics.overlap(this.player, this.enemy3);
+        this.physics.overlap(this.player, this.enemy4);
+        this.physics.overlap(this.player, this.enemy5);
+        this.physics.overlap(this.player, this.enemy6);
+        this.physics.overlap(this.player, this.enemy7);
+        
         if(this.physics.overlap(this.enemy0, this.boom0)){
             
             this.boom0.reset();
-            console.log('reset boom 0');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom1)){
             
             this.boom1.reset();
-            console.log('reset boom 1');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom2)){
             
             this.boom2.reset();
-            console.log('reset boom 2');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom3)){
             
             this.boom3.reset();
-            console.log('reset boom 3');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom4)){
             
             this.boom4.reset();
-            console.log('reset boom 4');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom5)){
             
             this.boom5.reset();
-            console.log('reset boom 5');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom6)){
             
             this.boom6.reset();
-            console.log('reset boom 6');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom7)){
             
             this.boom7.reset();
-            console.log('reset boom 7');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom8)){
             
             this.boom8.reset();
-            console.log('reset boom 8');
             this.enemy0.death();
         }
         if(this.physics.overlap(this.enemy0, this.boom9)){
             
             this.boom9.reset();
-            console.log('reset boom 9');
             this.enemy0.death();
         }
+
+
         
 
         if(Phaser.Input.Keyboard.JustDown(keyG) && bombNum > 0){
