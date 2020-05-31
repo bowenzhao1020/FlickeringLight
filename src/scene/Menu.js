@@ -44,7 +44,7 @@ class Menu extends Phaser.Scene{
     update(){
         // play scene change
         if(this.key.isDown){
-            this.scene.start("playScene");
+            this.scene.start("Lv1");
         }
     }
 }

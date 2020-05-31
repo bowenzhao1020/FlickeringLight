@@ -1,6 +1,6 @@
-class Play extends Phaser.Scene{
+class LV1 extends Phaser.Scene{
     constructor(){
-        super("playScene");
+        super("Lv1");
     }
 
     preload(){
@@ -36,11 +36,12 @@ class Play extends Phaser.Scene{
             },
             fixedWidth: 0
         }
+
+        enemyNorm = 15;
+        enemySum = enemyNorm + enemyFast + enemySlow;
         
         this.bombUI = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
-        console.log(this.bombUI.x);
         this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
-        console.log(this.enemyUI.x);
 
 
         //key inputs
@@ -49,7 +50,7 @@ class Play extends Phaser.Scene{
         keyUp     = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-        keySpace  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyG      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
         
         //game world tile
@@ -63,9 +64,9 @@ class Play extends Phaser.Scene{
         rock   = Gmap.addTilesetImage('Rock');
 
         // //layer adding
-        dirtLay  = Gmap.createStaticLayer('Dirt',    [dirt, water], 0, 0).setDepth(-1);
-        grassLay = Gmap.createStaticLayer('Grass',   [grass], 0, 0).setDepth(-1);
-        objLay   = Gmap.createStaticLayer('Object',  [tree, rock, plants], 0, 0).setDepth(-1);
+        dirtLay  = Gmap.createStaticLayer('Dirt',     [dirt, water], 0, 0).setDepth(-1);
+        grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
+        objLay   = Gmap.createStaticLayer('Object',   [tree, rock, plants], 0, 0).setDepth(-1);
         obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0).setDepth(-1);
 
         //player sprite implement
@@ -94,14 +95,34 @@ class Play extends Phaser.Scene{
         this.boom9.reset();
 
         //enemy sprites
-        this.enemy0 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy1 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy2 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy3 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy4 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy5 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy6 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
-        this.enemy7 = new Normal(this, 400, 400, 'normal').setOrigin(0.5);
+        this.enemy0 = new Normal(this, spawn1.x, spawn1.y, 'normal').setOrigin(0.5);
+        // rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);
+        // while(rndPt.x == this.enemy0.x && rndPt.y == this.enemy0.y){
+        //     rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);
+        // }
+        // console.log(spawn1.x);
+        // console.log(spawn1.y);
+        this.enemy1 = new Normal(this, spawn2.x, spawn2.y, 'normal').setOrigin(0.5);
+        // console.log(spawn2.x);
+        // console.log(spawn2.y);
+        this.enemy2 = new Normal(this, spawn3.x, spawn3.y, 'normal').setOrigin(0.5);
+        // console.log(spawn3.x);
+        // console.log(spawn3.y);
+        this.enemy3 = new Normal(this, spawn4.x, spawn4.y, 'normal').setOrigin(0.5);
+        // console.log(spawn4.x);
+        // console.log(spawn4.y);
+        this.enemy4 = new Normal(this, spawn5.x, spawn5.y, 'normal').setOrigin(0.5);
+        // console.log(spawn5.x);
+        // console.log(spawn5.y);
+        this.enemy5 = new Normal(this, spawn6.x, spawn6.y, 'normal').setOrigin(0.5);
+        // console.log(spawn6.x);
+        // console.log(spawn6.y);
+        this.enemy6 = new Normal(this, spawn7.x, spawn7.y, 'normal').setOrigin(0.5);
+        // console.log(spawn7.x);
+        // console.log(spawn7.y);
+        this.enemy7 = new Normal(this, spawn8.x, spawn8.y, 'normal').setOrigin(0.5);
+        // console.log(spawn8.x);
+        // console.log(spawn8.y);
 
         //main camera setting
         this.cameras.main.startFollow(this.player);
@@ -132,69 +153,68 @@ class Play extends Phaser.Scene{
         this.bombUI.setScrollFactor(0);
         this.enemyUI.setScrollFactor(0);
 
+        //player update
         this.player.update();
         if(!this.enemy0.dead){
             this.enemy0.update();
         }
 
-
-
         this.physics.overlap(this.player, this.enemy0);
-        if(this.physics.collide(this.enemy0, this.boom0)){
+        if(this.physics.overlap(this.enemy0, this.boom0)){
             
             this.boom0.reset();
             console.log('reset boom 0');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom1)){
+        if(this.physics.overlap(this.enemy0, this.boom1)){
             
             this.boom1.reset();
             console.log('reset boom 1');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom2)){
+        if(this.physics.overlap(this.enemy0, this.boom2)){
             
             this.boom2.reset();
             console.log('reset boom 2');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom3)){
+        if(this.physics.overlap(this.enemy0, this.boom3)){
             
             this.boom3.reset();
             console.log('reset boom 3');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom4)){
+        if(this.physics.overlap(this.enemy0, this.boom4)){
             
             this.boom4.reset();
             console.log('reset boom 4');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom5)){
+        if(this.physics.overlap(this.enemy0, this.boom5)){
             
             this.boom5.reset();
             console.log('reset boom 5');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom6)){
+        if(this.physics.overlap(this.enemy0, this.boom6)){
             
             this.boom6.reset();
             console.log('reset boom 6');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom7)){
+        if(this.physics.overlap(this.enemy0, this.boom7)){
             
             this.boom7.reset();
             console.log('reset boom 7');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom8)){
+        if(this.physics.overlap(this.enemy0, this.boom8)){
             
             this.boom8.reset();
             console.log('reset boom 8');
             this.enemy0.death();
         }
-        if(this.physics.collide(this.enemy0, this.boom9)){
+        if(this.physics.overlap(this.enemy0, this.boom9)){
             
             this.boom9.reset();
             console.log('reset boom 9');
@@ -202,7 +222,7 @@ class Play extends Phaser.Scene{
         }
         
 
-        if(Phaser.Input.Keyboard.JustDown(keySpace) && bombNum > 0){
+        if(Phaser.Input.Keyboard.JustDown(keyG) && bombNum > 0){
             if(this.boom0.isCreate == false){
                 console.log('boom0');
                 this.setBomb(this.boom0);
@@ -271,5 +291,18 @@ class Play extends Phaser.Scene{
         bomb.x = this.player.x;
         bomb.y = this.player.y;
         
+    }
+
+    bombExp(bombExp){
+
+        this.bombHB.x = bomb.x;
+        this.bombHB.y = bomb.y;
+
+    }
+
+    random(min, max){
+        return Math.floor(
+            Math.random() * (max - min + 1) + min
+        )
     }
 }
