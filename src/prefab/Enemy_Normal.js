@@ -50,9 +50,9 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
 
     //check death function
     death(){
-        enemyNorm -= 1;
-        enemySum = enemyNorm + enemyFast + enemySlow;
-        this.scene.enemyUI.text = 'Enemy: ' + enemySum;
+        // enemyNorm -= 1;
+        // enemySum = enemyNorm + enemyFast + enemySlow;
+        // this.scene.enemyUI.text = 'Enemy: ' + enemySum;
         this.dead = true;
         this.x = -100;
         this.y = -100;
@@ -62,6 +62,9 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
     }
 
     reset(){
+        enemyNorm -= 1;
+        enemySum = enemyNorm + enemyFast + enemySlow;
+        this.scene.enemyUI.text = 'Enemy: ' + enemySum;
         rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);
         this.x = rndPt.x;
         this.y = rndPt.y;

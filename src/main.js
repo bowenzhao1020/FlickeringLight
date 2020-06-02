@@ -57,4 +57,4 @@ let spawnPt = [spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8];
 let rndPt;
 
 //game over var
-let gameOver = false;
+let gameOver = false, nextLv = false;

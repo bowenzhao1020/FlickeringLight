@@ -37,11 +37,12 @@ class LV1 extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        enemyNorm = 15;
+        enemyNorm = 2;
         enemySum = enemyNorm + enemyFast + enemySlow;
         
         this.bombUI = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
         this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
+        this.display = this.add.text(centerX, centerY, '', displayConfig).setOrigin(0.5);
 
 
         //key inputs
@@ -158,159 +159,234 @@ class LV1 extends Phaser.Scene{
         //UI display
         this.bombUI.setScrollFactor(0);
         this.enemyUI.setScrollFactor(0);
+        this.display.setScrollFactor(0);
 
-        //player update
-        this.player.update();
-        if(enemySum > 0)
-        {
-            if(!this.enemy0.dead){
-                this.enemy0.update();
+        if(gameOver == false && nextLv == false){
+                //player update
+            this.player.update();
+            if(enemySum > 0)
+            {
+                if(!this.enemy0.dead){
+                    this.enemy0.update();
+                }
+                if(!this.enemy1.dead){
+                    this.enemy1.update();
+                }
+                if(!this.enemy2.dead){
+                    this.enemy2.update();
+                }
+                if(!this.enemy3.dead){
+                    this.enemy3.update();
+                }
+                if(!this.enemy4.dead){
+                    this.enemy4.update();
+                }
+                if(!this.enemy5.dead){
+                    this.enemy5.update();
+                }
+                if(!this.enemy6.dead){
+                    this.enemy6.update();
+                }
+                if(!this.enemy7.dead){
+                    this.enemy7.update();
+                }
             }
-            if(!this.enemy1.dead){
-                this.enemy1.update();
-            }
-            if(!this.enemy2.dead){
-                this.enemy2.update();
-            }
-            if(!this.enemy3.dead){
-                this.enemy3.update();
-            }
-            if(!this.enemy4.dead){
-                this.enemy4.update();
-            }
-            if(!this.enemy5.dead){
-                this.enemy5.update();
-            }
-            if(!this.enemy6.dead){
-                this.enemy6.update();
-            }
-            if(!this.enemy7.dead){
-                this.enemy7.update();
-            }
-        }
 
-        this.physics.overlap(this.player, this.enemy0);
-        this.physics.overlap(this.player, this.enemy1);
-        this.physics.overlap(this.player, this.enemy2);
-        this.physics.overlap(this.player, this.enemy3);
-        this.physics.overlap(this.player, this.enemy4);
-        this.physics.overlap(this.player, this.enemy5);
-        this.physics.overlap(this.player, this.enemy6);
-        this.physics.overlap(this.player, this.enemy7);
-        
-        if(this.physics.overlap(this.enemy0, this.boom0)){
+            this.physics.overlap(this.player, this.enemy0);
+            this.physics.overlap(this.player, this.enemy1);
+            this.physics.overlap(this.player, this.enemy2);
+            this.physics.overlap(this.player, this.enemy3);
+            this.physics.overlap(this.player, this.enemy4);
+            this.physics.overlap(this.player, this.enemy5);
+            this.physics.overlap(this.player, this.enemy6);
+            this.physics.overlap(this.player, this.enemy7);
             
-            this.boom0.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom1)){
-            
-            this.boom1.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom2)){
-            
-            this.boom2.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom3)){
-            
-            this.boom3.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom4)){
-            
-            this.boom4.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom5)){
-            
-            this.boom5.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom6)){
-            
-            this.boom6.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom7)){
-            
-            this.boom7.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom8)){
-            
-            this.boom8.reset();
-            this.enemy0.death();
-        }
-        if(this.physics.overlap(this.enemy0, this.boom9)){
-            
-            this.boom9.reset();
-            this.enemy0.death();
-        }
+            if(this.physics.overlap(this.enemy0, this.boom0)){
+                
+                this.boom0.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom1)){
+                
+                this.boom1.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom2)){
+                
+                this.boom2.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom3)){
+                
+                this.boom3.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom4)){
+                
+                this.boom4.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom5)){
+                
+                this.boom5.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom6)){
+                
+                this.boom6.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom7)){
+                
+                this.boom7.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom8)){
+                
+                this.boom8.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
+            if(this.physics.overlap(this.enemy0, this.boom9)){
+                
+                this.boom9.reset();
+                if(enemySum > 0)
+                {
+                    this.enemy0.reset();
+                }
+                else{
+                    this.enemy0.death();
+                }
+            }
 
 
-        
+            
 
-        if(Phaser.Input.Keyboard.JustDown(keyG) && bombNum > 0){
-            if(this.boom0.isCreate == false){
-                console.log('boom0');
-                this.setBomb(this.boom0);
-                this.boom0.activate();
+            if(Phaser.Input.Keyboard.JustDown(keyG) && bombNum > 0){
+                if(this.boom0.isCreate == false){
+                    console.log('boom0');
+                    this.setBomb(this.boom0);
+                    this.boom0.activate();
+                }
+                else if(this.boom1.isCreate == false && this.boom0.isCreate == true){
+                    console.log('boom1');
+                    this.setBomb(this.boom1);
+                    this.boom1.activate();
+                }
+                else if(this.boom2.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true){
+                    console.log('boom2');
+                    this.setBomb(this.boom2);
+                    this.boom2.activate();
+                }
+                else if(this.boom3.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true){
+                    console.log('boom3');
+                    this.setBomb(this.boom3);
+                    this.boom3.activate();
+                }
+                else if(this.boom4.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true 
+                                                    && this.boom2.isCreate == true && this.boom3.isCreate == true){
+                    console.log('boom4');
+                    this.setBomb(this.boom4);
+                    this.boom4.activate();
+                }
+                else if(this.boom5.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
+                                                    && this.boom3.isCreate == true && this.boom4.isCreate == true){
+                    console.log('boom5');
+                    this.setBomb(this.boom5);
+                    this.boom5.activate();
+                }
+                else if(this.boom6.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
+                                                    && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true){
+                    console.log('boom6');
+                    this.setBomb(this.boom6);
+                    this.boom6.activate();
+                }
+                else if(this.boom7.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
+                                                    && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
+                                                    && this.boom6.isCreate == true){
+                    console.log('boom7');
+                    this.setBomb(this.boom7);
+                    this.boom7.activate();
+                }
+                else if(this.boom8.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
+                                                    && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
+                                                    && this.boom6.isCreate == true && this.boom7.isCreate == true){
+                    console.log('boom8');
+                    this.setBomb(this.boom8);
+                    this.boom8.activate();
+                }
+                else if(this.boom9.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
+                                                    && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
+                                                    && this.boom6.isCreate == true && this.boom7.isCreate == true && this.boom8.isCreate == true){
+                    console.log('boom9');
+                    this.setBomb(this.boom9);
+                    this.boom9.activate();
+                }
             }
-            else if(this.boom1.isCreate == false && this.boom0.isCreate == true){
-                console.log('boom1');
-                this.setBomb(this.boom1);
-                this.boom1.activate();
+        }
+        if(enemySum == 0){
+            this.display.text = 'You have survived tonight \n press F to continue to the next night';
+            if(keyF.isDown){
+                this.scene.start('Lv2');
             }
-            else if(this.boom2.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true){
-                console.log('boom2');
-                this.setBomb(this.boom2);
-                this.boom2.activate();
-            }
-            else if(this.boom3.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true){
-                console.log('boom3');
-                this.setBomb(this.boom3);
-                this.boom3.activate();
-            }
-            else if(this.boom4.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true 
-                                                 && this.boom2.isCreate == true && this.boom3.isCreate == true){
-                console.log('boom4');
-                this.setBomb(this.boom4);
-                this.boom4.activate();
-            }
-            else if(this.boom5.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
-                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true){
-                console.log('boom5');
-                this.setBomb(this.boom5);
-                this.boom5.activate();
-            }
-            else if(this.boom6.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
-                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true){
-                console.log('boom6');
-                this.setBomb(this.boom6);
-                this.boom6.activate();
-            }
-            else if(this.boom7.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
-                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
-                                                 && this.boom6.isCreate == true){
-                console.log('boom7');
-                this.setBomb(this.boom7);
-                this.boom7.activate();
-            }
-            else if(this.boom8.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
-                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
-                                                 && this.boom6.isCreate == true && this.boom7.isCreate == true){
-                console.log('boom8');
-                this.setBomb(this.boom8);
-                this.boom8.activate();
-            }
-            else if(this.boom9.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
-                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
-                                                 && this.boom6.isCreate == true && this.boom7.isCreate == true && this.boom8.isCreate == true){
-                console.log('boom9');
-                this.setBomb(this.boom9);
-                this.boom9.activate();
+        }
+        if(gameOver == true){
+            this.display.text = 'The lights has been blew off, \nyou are dragged into the endless darkness \n press F to restart this level';
+            if(keyF.isDown){
+                this.scene.start('Lv1');
             }
         }
         
