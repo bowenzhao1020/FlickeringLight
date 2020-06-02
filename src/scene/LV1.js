@@ -6,9 +6,12 @@ class LV1 extends Phaser.Scene{
     preload(){
 
         this.load.image('player', "./assets/Character.png");
-        this.load.image('fast', "./assets/A.png");
-        this.load.image('normal', "./assets/B.png");
-        this.load.image('bomb', "./assets/C.png");
+        this.load.image('bomb', "./assets/Bomb.png");
+        this.load.spritesheet('Candle', './assets/Candle.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 3});
+        this.load.spritesheet('Explosion', './assets/Explosion.png', {frameWidth: 96, frameHeight: 96, startFrame:0, endFrame: 1});
+        this.load.spritesheet('spinATK', './assets/SpinATK.png', {frameWidth: 96, frameHeight: 128, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('normal', './assets/GhostNorm.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 1});
+        this.load.spritesheet('fast', './assets/GhostFast.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 1});
 
         //tile map needs
         this.load.image('Dirt',   './assets/Dirt.png');
@@ -37,13 +40,8 @@ class LV1 extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        enemyNorm = 2;
+        enemyNorm = 15;
         enemySum = enemyNorm + enemyFast + enemySlow;
-        
-        this.bombUI = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
-        this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
-        this.display = this.add.text(centerX, centerY, '', displayConfig).setOrigin(0.5);
-
 
         //key inputs
         keyLeft   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -53,7 +51,6 @@ class LV1 extends Phaser.Scene{
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyG      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
-        
         //game world tile
         Gmap = this.add.tilemap('Gmap');
 
@@ -71,7 +68,7 @@ class LV1 extends Phaser.Scene{
         obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0).setDepth(-1);
 
         //player sprite implement
-        this.player = new Player(this, spawnX, spawnY, 'player').setOrigin(0.5);
+        this.player = new Player(this, spawnX, spawnY, 'spinATK').setOrigin(0.5);
 
         //boom obj create
         this.boom0 = new Bomb(this, this.player.x, this.player.y, 'bomb').setOrigin(0.5);
@@ -95,60 +92,81 @@ class LV1 extends Phaser.Scene{
         this.boom9 = new Bomb(this, this.player.x, this.player.y, 'bomb').setOrigin(0.5);
         this.boom9.reset();
 
+        //animations
+        this.anims.create({
+            key: 'atk',
+            frames: this.anims.generateFrameNumbers('spinATK', { frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}),
+            frameRate: 20,
+        });
+
+        this.anims.create({
+            key: 'explosion',
+            frames: this.anims.generateFrameNumbers('Explosion', { frames: [0, 1] }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'candle',
+            frames: this.anims.generateFrameNumbers('Candle', { frames: [0, 1, 2, 3] }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'normMove',
+            frames: this.anims.generateFrameNumbers('normal', { frames: [0, 1] }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'fastMove',
+            frames: this.anims.generateFrameNumbers('fast', { frames: [0, 1] }),
+            frameRate: 10,
+        });
+    
         //enemy sprites
         this.enemy0 = new Normal(this, spawn1.x, spawn1.y, 'normal').setOrigin(0.5);
-        // rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);
-        // while(rndPt.x == this.enemy0.x && rndPt.y == this.enemy0.y){
-        //     rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);
-        // }
-        // console.log(spawn1.x);
-        // console.log(spawn1.y);
-        this.enemy1 = new Normal(this, spawn2.x, spawn2.y, 'normal').setOrigin(0.5);
-        // console.log(spawn2.x);
-        // console.log(spawn2.y);
-        this.enemy2 = new Normal(this, spawn3.x, spawn3.y, 'normal').setOrigin(0.5);
-        // console.log(spawn3.x);
-        // console.log(spawn3.y);
-        this.enemy3 = new Normal(this, spawn4.x, spawn4.y, 'normal').setOrigin(0.5);
-        // console.log(spawn4.x);
-        // console.log(spawn4.y);
-        this.enemy4 = new Normal(this, spawn5.x, spawn5.y, 'normal').setOrigin(0.5);
-        // console.log(spawn5.x);
-        // console.log(spawn5.y);
-        this.enemy5 = new Normal(this, spawn6.x, spawn6.y, 'normal').setOrigin(0.5);
-        // console.log(spawn6.x);
-        // console.log(spawn6.y);
-        this.enemy6 = new Normal(this, spawn7.x, spawn7.y, 'normal').setOrigin(0.5);
-        // console.log(spawn7.x);
-        // console.log(spawn7.y);
-        this.enemy7 = new Normal(this, spawn8.x, spawn8.y, 'normal').setOrigin(0.5);
-        // console.log(spawn8.x);
-        // console.log(spawn8.y);
+        
 
-        //main camera setting
-        this.cameras.main.startFollow(this.player);
-        this.cameras.main.setBounds(0, 0, 3200, 3200);
+        this.enemy1 = new Normal(this, spawn2.x, spawn2.y, 'normal').setOrigin(0.5);
+        
+
+        this.enemy2 = new Normal(this, spawn3.x, spawn3.y, 'normal').setOrigin(0.5);
+        
+
+        this.enemy3 = new Normal(this, spawn4.x, spawn4.y, 'normal').setOrigin(0.5);
+        
+
+        this.enemy4 = new Normal(this, spawn5.x, spawn5.y, 'normal').setOrigin(0.5);
+        
+
+        this.enemy5 = new Normal(this, spawn6.x, spawn6.y, 'normal').setOrigin(0.5);
+        
+
+        this.enemy6 = new Normal(this, spawn7.x, spawn7.y, 'normal').setOrigin(0.5);
+        
+
+        this.enemy7 = new Normal(this, spawn8.x, spawn8.y, 'normal').setOrigin(0.5);
+        
 
 
 
         //physics implement
         this.physics.add.existing(this.player);
 
-        //enemy group
-        this.enemies = this.physics.add.group({ classType: Normal,});
-
-        //bomb physics
-        this.bombs = this.physics.add.group( {classType: Bomb} );
-
-        //collider
-        this.physics.add.collider(this.enemies, this.bombs, function(enemy, bomb){
-            enemy.death();
-            bomb.reset();
-        })
+        //main camera setting
+        this.cameras.main.startFollow(this.player);
+        this.cameras.main.setBounds(0, 0, 3200, 3200);
 
         //custom player moving bounds for later tile implement
         cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
         this.player.body.setBoundsRectangle(cstBounds);
+
+
+
+        //UI display
+        this.bombUI  = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
+        this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
+        this.display = this.add.text(centerX, centerY, '', displayConfig).setOrigin(0.5);
 
 
     }
@@ -161,9 +179,33 @@ class LV1 extends Phaser.Scene{
         this.enemyUI.setScrollFactor(0);
         this.display.setScrollFactor(0);
 
+        this.enemy0.play('normMove');
+        this.enemy1.play('normMove');
+        this.enemy2.play('normMove');
+        this.enemy3.play('normMove');
+        this.enemy4.play('normMove');
+        this.enemy5.play('normMove');
+        this.enemy6.play('normMove');
+        this.enemy7.play('normMove');
+        
+        
+
         if(gameOver == false && nextLv == false){
-                //player update
+
+            if(keyF.isDown && this.player.atking == false){
+                this.player.body.setVelocityX(0);
+                this.player.body.setVelocityY(0);
+                this.player.atking = true;
+                this.player.play('atk');
+                this.player.on('animationcomplete', () => {
+                    this.player.setFrame[0];
+                    this.player.atking = false;
+                });
+            }
+
+             //player update
             this.player.update();
+
             if(enemySum > 0)
             {
                 if(!this.enemy0.dead){

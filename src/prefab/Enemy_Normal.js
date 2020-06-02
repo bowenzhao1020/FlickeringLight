@@ -8,6 +8,8 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
         this.scene.physics.add.existing(this);
 
         this.hp = 2;
+        
+        this.isHurt = false;
 
         this.dead = false;
 
@@ -43,6 +45,7 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
     //dmg function for get hit
     getHit(){
         this.hp -= 1;
+        this.isHurt = true;
         if(this.hp == 0){
             this.death();
         }

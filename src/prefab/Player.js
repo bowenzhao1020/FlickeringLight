@@ -6,35 +6,38 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //add to existing, displayList, updateList
         scene.add.existing(this);
 
+        this.atking = false;
+
     }
 
     update(){
 
         this.body.collideWorldBounds = true;
 
-        //player movement setting
-        if(keyLeft.isDown){
-            this.setFlipX(false);
-            this.body.setVelocityX(-500);
-        }
-        else if(keyRight.isDown){
-            this.setFlipX(true);
-            this.body.setVelocityX(500);
-        }
-        else{
-            this.body.setVelocityX(0);
-        }
+        if(this.atking == false){
+            //player movement setting
+            if(keyLeft.isDown){
+                this.setFlipX(true);
+                this.body.setVelocityX(-500);
+            }
+            else if(keyRight.isDown){
+                this.setFlipX(false);
+                this.body.setVelocityX(500);
+            }
+            else{
+                this.body.setVelocityX(0);
+            }
 
-        if(keyUp.isDown){
-            this.body.setVelocityY(-500);
+            if(keyUp.isDown){
+                this.body.setVelocityY(-500);
+            }
+            else if(keyDown.isDown){
+                this.body.setVelocityY(500);
+            }
+            else{
+                this.body.setVelocityY(0);
+            }
         }
-        else if(keyDown.isDown){
-            this.body.setVelocityY(500);
-        }
-        else{
-            this.body.setVelocityY(0);
-        }
-
         
     }
 
