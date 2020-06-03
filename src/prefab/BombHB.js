@@ -7,7 +7,6 @@ class BombHB extends Phaser.Physics.Arcade.Sprite{
 
         this.scene.physics.add.existing(this);
         this.body.onCollide = true;
-        this.isCreate = false;
     }
 
     update(){
@@ -15,15 +14,12 @@ class BombHB extends Phaser.Physics.Arcade.Sprite{
     }
 
     reset(){
-        this.x = spawnX;
-        this.y = spawnY;
-        this.isCreate = false;
+        this.x = -300;
+        this.y = -300;
         this.setVisible(false);
     }
 
     activate(){
-        this.x = 
-        this.isCreate = true;
         this.setVisible(true);
     }
 

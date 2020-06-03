@@ -6,6 +6,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //add to existing, displayList, updateList
         scene.add.existing(this);
 
+        this.scene.physics.add.existing(this);
+        
         this.atking = false;
 
     }
