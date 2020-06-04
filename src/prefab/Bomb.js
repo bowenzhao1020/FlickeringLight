@@ -8,6 +8,7 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
         this.scene.physics.add.existing(this);
         this.body.onCollide = true;
         this.isCreate = false;
+        this.isOL = false;
     }
 
     update(){
@@ -18,6 +19,7 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
         this.x = -200;
         this.y = -200;
         this.isCreate = false;
+        this.isOL = false;
         this.setVisible(false);
     }
 

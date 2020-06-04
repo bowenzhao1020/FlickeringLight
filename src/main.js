@@ -56,5 +56,8 @@ let spawnPt = [spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8];
 
 let rndPt;
 
+//candle HP
+let candleHP;
+
 //game over var
 let gameOver = false, nextLv = false;

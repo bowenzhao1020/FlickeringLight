@@ -1,4 +1,4 @@
-class Slash extends Phaser.Physics.Arcade.Sprite{
+class Candle extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
 
@@ -7,7 +7,11 @@ class Slash extends Phaser.Physics.Arcade.Sprite{
 
         this.scene.physics.add.existing(this);
         this.body.onCollide = true;
-        this.isAttack = false;
 
+    }
+
+    dmg(){
+        candleHP -= 1;
+        this.scene.HPUI.text = 'HP remain: ' + candleHP;
     }
 }

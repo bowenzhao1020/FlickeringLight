@@ -40,6 +40,8 @@ class LV1 extends Phaser.Scene{
             fixedWidth: 0
         }
 
+        candleHP = 8;
+
         enemyNorm = 15;
         enemySum = enemyNorm + enemyFast + enemySlow;
 
@@ -107,7 +109,7 @@ class LV1 extends Phaser.Scene{
         });
 
         this.anims.create({
-            key: 'candle',
+            key: 'candleLight',
             frames: this.anims.generateFrameNumbers('Candle', { frames: [0, 1, 2, 3] }),
             frameRate: 10,
             repeat: -1,
@@ -125,8 +127,6 @@ class LV1 extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('fast', { frames: [0, 1] }),
             frameRate: 10,
         });
-
-        
 
         //enemy sprites animation
         this.enemy0 = new Normal(this, spawn1.x, spawn1.y, 'normal').play('normMove').setOrigin(0.5);
@@ -159,7 +159,9 @@ class LV1 extends Phaser.Scene{
         this.bombHB8.reset();
         this.bombHB9 = new BombHB(this, -300, -300, 'Explosion').play('explosion').setOrigin(0.5);
         this.bombHB9.reset();
-        
+
+        //candle sprite and animation
+        this.candle = new Candle(this, spawnX, spawnY, 'Candle').play('candleLight').setOrigin(0.5);
 
         //main camera setting
         this.cameras.main.startFollow(this.player);
@@ -174,7 +176,8 @@ class LV1 extends Phaser.Scene{
         //UI display
         this.bombUI  = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
         this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
-        this.display = this.add.text(centerX, centerY + 300, '', displayConfig).setOrigin(0.5);
+        this.HPUI    = this.add.text(centerX      , centerY - 370, 'HP Remain: ' + candleHP, displayConfig).setOrigin(0.5);
+        this.display = this.add.text(centerX      , centerY + 300, '', displayConfig).setOrigin(0.5);
 
 
     }
@@ -185,6 +188,7 @@ class LV1 extends Phaser.Scene{
         //UI display
         this.bombUI.setScrollFactor(0);
         this.enemyUI.setScrollFactor(0);
+        this.HPUI.setScrollFactor(0);
         this.display.setScrollFactor(0);
 
         //player collision with enemies
@@ -196,7 +200,12 @@ class LV1 extends Phaser.Scene{
         this.physics.overlap(this.player, this.enemy5);
         this.physics.overlap(this.player, this.enemy6);
         this.physics.overlap(this.player, this.enemy7);
-        
+
+        //enemies damage candle
+        this.dmgCandle();
+        if(candleHP == 0){
+            gameOver = true;
+        }
 
         if(gameOver == false && nextLv == false){
 
@@ -251,6 +260,18 @@ class LV1 extends Phaser.Scene{
             this.bombReset(this.enemy5);
             this.bombReset(this.enemy6);
             this.bombReset(this.enemy7);
+
+            //explosion animation check with enemies
+            this.expCheck(this.bombHB0);
+            this.expCheck(this.bombHB1);
+            this.expCheck(this.bombHB2);
+            this.expCheck(this.bombHB3);
+            this.expCheck(this.bombHB4);
+            this.expCheck(this.bombHB5);
+            this.expCheck(this.bombHB6);
+            this.expCheck(this.bombHB7);
+            this.expCheck(this.bombHB8);
+            this.expCheck(this.bombHB9);
 
             //order of bomb planting
             this.bombOrder();
@@ -311,7 +332,6 @@ class LV1 extends Phaser.Scene{
         bombHB.x = bomb.x;
         bombHB.y = bomb.y;
         bombHB.activate();
-        //console.log('hit box created');
 
     }
 
@@ -324,120 +344,100 @@ class LV1 extends Phaser.Scene{
 
     //check collision of enemy collide with each bomb and bomb resets
     bombReset(enemy){
-        if(this.physics.overlap(enemy, this.boom0)){
+        if(this.physics.overlap(enemy, this.boom0) && this.boom0.isOL == false){
+            this.boom0.isOL = true;
             this.bombExp(this.bombHB0, this.boom0);
+            this.time.delayedCall(1000, () => {this.bombHB0.reset();});
             this.boom0.reset();
-            this.expCheck(this.bombHB0);
         }
-        if(this.physics.overlap(enemy, this.boom1)){
-                
+        if(this.physics.overlap(enemy, this.boom1) && this.boom1.isOL == false){
+            this.boom1.isOL = true;
             this.bombExp(this.bombHB1, this.boom1);
+            this.time.delayedCall(1000, () => {this.bombHB1.reset();});
             this.boom1.reset();
-            this.expCheck(this.bombHB1);
         }
-        if(this.physics.overlap(enemy, this.boom2)){
-            
+        if(this.physics.overlap(enemy, this.boom2) && this.boom2.isOL == false){
+            this.boom2.isOL = true;
             this.bombExp(this.bombHB2, this.boom2);
+            this.time.delayedCall(1000, () => {this.bombHB2.reset();});
             this.boom2.reset();
-            this.expCheck(this.bombHB2);
         }
-        if(this.physics.overlap(enemy, this.boom3)){
-            
+        if(this.physics.overlap(enemy, this.boom3) && this.boom3.isOL == false){
+            this.boom3.isOL = true;
             this.bombExp(this.bombHB3, this.boom3);
+            this.time.delayedCall(1000, () => {this.bombHB3.reset();});
             this.boom3.reset();
-            this.expCheck(this.bombHB3);
         }
-        if(this.physics.overlap(enemy, this.boom4)){
-            
+        if(this.physics.overlap(enemy, this.boom4) && this.boom4.isOL == false){
+            this.boom4.isOL = true;
             this.bombExp(this.bombHB4, this.boom4);
+            this.time.delayedCall(1000, () => {this.bombHB4.reset();});
             this.boom4.reset();
-            this.expCheck(this.bombHB4);
         }
-        if(this.physics.overlap(enemy, this.boom5)){
-            
+        if(this.physics.overlap(enemy, this.boom5) && this.boom5.isOL == false){
+            this.boom5.isOL = true;
             this.bombExp(this.bombHB5, this.boom5);
+            this.time.delayedCall(1000, () => {this.bombHB5.reset();});
             this.boom5.reset();
-            this.expCheck(this.bombHB5);
         }
-        if(this.physics.overlap(enemy, this.boom6)){
-            
+        if(this.physics.overlap(enemy, this.boom6) && this.boom6.isOL == false){
+            this.boom6.isOL = true;
             this.bombExp(this.bombHB6, this.boom6);
+            this.time.delayedCall(1000, () => {this.bombHB6.reset();});
             this.boom6.reset();
-            this.expCheck(this.bombHB6);
         }
-        if(this.physics.overlap(enemy, this.boom7)){
-            
+        if(this.physics.overlap(enemy, this.boom7) && this.boom7.isOL == false){
+            this.boom7.isOL = true;
             this.bombExp(this.bombHB7, this.boom7);
+            this.time.delayedCall(1000, () => {this.bombHB7.reset();});
             this.boom7.reset();
-            this.expCheck(this.bombHB7);
         }
-        if(this.physics.overlap(enemy, this.boom8)){
-            
+        if(this.physics.overlap(enemy, this.boom8) && this.boom8.isOL == false){
+            this.boom8.isOL = true;
             this.bombExp(this.bombHB8, this.boom8);
+            this.time.delayedCall(1000, () => {this.bombHB8.reset();});
             this.boom8.reset();
-            this.expCheck(this.bombHB8);
         }
-        if(this.physics.overlap(enemy, this.boom9)){
-            
+        if(this.physics.overlap(enemy, this.boom9) && this.boom9.isOL == false){
+            this.boom9.isOL = true;
             this.bombExp(this.bombHB9, this.boom9);
+            this.time.delayedCall(1000, () => {this.bombHB9.reset();});
             this.boom9.reset();
-            this.expCheck(this.bombHB9);
         }
     }
 
     //explosion gif overLap check
     expCheck(hitbox){
-        console.log('inside hit box check');
-        if(this.physics.overlap(this.enemy0, this.bombHB0)){
-            console('check');
-            if(enemySum > 0){
+        if(enemySum > 0){
+
+            if(this.physics.overlap(this.enemy0, hitbox)){
+                console.log('check');
                 console.log('if in');
                 this.enemy0.reset();
             }
-            this.time.delayedCall(1000, () => {this.bombHB0.reset();});
-        }
-        if(this.physics.overlap(this.enemy1, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy1, hitbox)){
                 this.enemy1.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
-        }
-        if(this.physics.overlap(this.enemy2, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy2, hitbox)){
                 this.enemy2.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
-        }
-        if(this.physics.overlap(this.enemy3, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy3, hitbox)){
                 this.enemy3.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
-        }
-        if(this.physics.overlap(this.enemy4, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy4, hitbox)){
                 this.enemy4.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
-        }
-        if(this.physics.overlap(this.enemy5, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy5, hitbox)){
                 this.enemy5.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
-        }
-        if(this.physics.overlap(this.enemy6, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy6, hitbox)){
                 this.enemy6.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
-        }
-        if(this.physics.overlap(this.enemy7, hitbox)){
-            if(enemySum > 0){
+            if(this.physics.overlap(this.enemy7, hitbox)){
                 this.enemy7.reset();
             }
-            this.time.delayedCall(1000, () => {hitbox.reset();});
         }
+        
     }
 
     //order of bomb creation
@@ -502,6 +502,43 @@ class LV1 extends Phaser.Scene{
                 this.setBomb(this.boom9);
                 this.boom9.activate();
             }
+        }
+    }
+
+    //candle HP
+    dmgCandle(){
+        if(this.physics.overlap(this.enemy0, this.candle)){
+            console.log('dat hurt');
+            this.enemy0.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy1, this.candle)){
+            this.enemy1.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy2, this.candle)){
+            this.enemy2.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy3, this.candle)){
+            this.enemy3.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy4, this.candle)){
+            this.enemy4.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy5, this.candle)){
+            this.enemy5.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy6, this.candle)){
+            this.enemy6.reset();
+            this.candle.dmg();
+        }
+        if(this.physics.overlap(this.enemy7, this.candle)){
+            this.enemy7.reset();
+            this.candle.dmg();
         }
     }
 }
