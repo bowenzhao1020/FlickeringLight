@@ -236,6 +236,9 @@ class LV1 extends Phaser.Scene{
         this.physics.overlap(this.player, this.enemy6);
         this.physics.overlap(this.player, this.enemy7);
 
+        //player collision with candle
+        this.physics.collide(this.player, this.candle);
+
         //enemies damage candle
         this.dmgCandle();
         if(candleHP == 0){

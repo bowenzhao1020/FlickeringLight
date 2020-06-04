@@ -7,6 +7,7 @@ class Candle extends Phaser.Physics.Arcade.Sprite{
 
         this.scene.physics.add.existing(this);
         this.body.onCollide = true;
+        this.body.setImmovable(true);
 
     }
 
