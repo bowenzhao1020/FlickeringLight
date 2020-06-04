@@ -5,16 +5,16 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
         //add to existing, displayList, updateList
         scene.add.existing(this);
 
+        //basic physics properties
         this.scene.physics.add.existing(this);
         this.body.onCollide = true;
+        //check if already in the field
         this.isCreate = false;
+        //check if overlap
         this.isOL = false;
     }
 
-    update(){
-
-    }
-
+    //reset after collide with enemy
     reset(){
         this.x = -200;
         this.y = -200;
@@ -23,6 +23,7 @@ class Bomb extends Phaser.Physics.Arcade.Sprite{
         this.setVisible(false);
     }
 
+    //show up uopon key pressed for summon
     activate(){
         bombNum -= 1;
         this.scene.bombUI.text = 'Bomb: ' + bombNum;

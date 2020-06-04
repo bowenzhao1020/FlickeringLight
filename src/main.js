@@ -42,7 +42,7 @@ let Gmap, dirt, grass, tree, plants, water, rock;
 let dirtLay, grassLay, objLay, obj2Lay;
 
 //player skill key
-let bombNum = 100;
+let bombNum = 10;
 
 //enemy spawn count
 let enemyNorm = 0, enemyFast = 0, enemySlow = 0, enemySum = enemyNorm + enemyFast + enemySlow;

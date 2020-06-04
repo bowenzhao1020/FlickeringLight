@@ -43,4 +43,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         
     }
 
+    stop(){
+        this.setVelocityX(0);
+        this.setVelocityY(0);
+    }
+
 }
