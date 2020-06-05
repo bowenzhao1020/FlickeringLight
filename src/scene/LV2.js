@@ -26,7 +26,7 @@ class LV2 extends Phaser.Scene{
         this.load.image('Water',  './assets/Water.png');
         this.load.image('Plants', './assets/Plants.png');
 
-        //json file load
+        //json file load 
         this.load.tilemapTiledJSON('Gmap', './assets/GameMap.json');
         
     }
