@@ -35,16 +35,16 @@ class Menu extends Phaser.Scene{
         }
 
         this.add.text(centerX, centerY - 300, 'Unknown', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + 300, 'Press F Key To Start', infoConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 300, 'Press SPACE bar To Start', infoConfig).setOrigin(0.5);
 
         //F key scene change
-        this.key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        this.key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update(){
         // play scene change
         if(this.key.isDown){
-            this.scene.start("playScene");
+            this.scene.start("Lv1");
         }
     }
 }
