@@ -1,4 +1,4 @@
-class Normal extends Phaser.Physics.Arcade.Sprite{
+class Slow extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
 
@@ -7,7 +7,7 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
 
         this.scene.physics.add.existing(this);
 
-        this.hp = 2;
+        this.hp = 3;
         
         this.isHurt = false;
 
@@ -47,10 +47,10 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
         this.hp -= 1;
         this.isHurt = true;
         if(this.hp == 0){
-            if(enemyNorm > 0){
+            if(enemySlow > 0){
                 this.resetKill(food, enemy);
             }
-            else if (enemyNorm == 0){
+            else if (enemySlow == 0){
                 this.death();
             }
         }
@@ -68,9 +68,9 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
 
     resetKill(food, enemy){
         this.scene.foodDrop(food, enemy);
-        this.hp = 2;
+        this.hp = 3;
         this.isHurt = false;
-        enemyNorm -= 1;
+        enemySlow -= 1;
         enemySum = enemyNorm + enemyFast + enemySlow;
         this.scene.enemyUI.text = 'Enemy: ' + enemySum;
         rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);
@@ -79,9 +79,9 @@ class Normal extends Phaser.Physics.Arcade.Sprite{
     }
 
     resetCandle(){
-        this.hp = 2;
+        this.hp = 3;
         this.isHurt = false;
-        enemyNorm -= 1;
+        enemySlow -= 1;
         enemySum = enemyNorm + enemyFast + enemySlow;
         this.scene.enemyUI.text = 'Enemy: ' + enemySum;
         rndPt = Phaser.Math.RND.pick([spawn1, spawn2, spawn3, spawn4, spawn5, spawn6, spawn7, spawn8]);

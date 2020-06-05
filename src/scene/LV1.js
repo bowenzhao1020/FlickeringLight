@@ -6,6 +6,7 @@ class LV1 extends Phaser.Scene{
     preload(){
 
         this.load.image('player', "./assets/Character.png");
+        //this.load.spritesheet('up', './assets/charUp.png', {frameWidth: , frameHeight: , startFrame: , endFrame: });
         this.load.image('bomb', "./assets/Bomb.png");
         this.load.spritesheet('Candle', './assets/Candle.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 3});
         this.load.spritesheet('Food', './assets/Food.png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 1});
@@ -56,6 +57,7 @@ class LV1 extends Phaser.Scene{
         keyDown   = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyG      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        keySpace  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         //game world tile
         Gmap = this.add.tilemap('Gmap');
@@ -252,9 +254,18 @@ class LV1 extends Phaser.Scene{
                 this.player.body.setVelocityY(0);
                 this.player.atking = true;
                 this.player.play('atk');
+                this.chkAttack(this.food0, this.enemy0);
+                this.chkAttack(this.food1, this.enemy1);
+                this.chkAttack(this.food2, this.enemy2);
+                this.chkAttack(this.food3, this.enemy3);
+                this.chkAttack(this.food4, this.enemy4);
+                this.chkAttack(this.food5, this.enemy5);
+                this.chkAttack(this.food6, this.enemy6);
+                this.chkAttack(this.food7, this.enemy7);
                 this.player.on('animationcomplete', () => {
                     this.player.setFrame[0];
                     this.player.atking = false;
+                    this.hitReset();
                 });
             }
 
@@ -332,8 +343,8 @@ class LV1 extends Phaser.Scene{
             this.enemy7.death();
 
             //text display for level complete
-            this.display.text = 'You have survived tonight \n collect your food and have a rest \npress F to continue to the next night';
-            if(keyF.isDown){
+            this.display.text = 'You have survived tonight \n collect your food and have a rest \npress SPACE to continue to the next night';
+            if(keySpace.isDown){
                 this.scene.start('Lv2');
             }
         }
@@ -352,8 +363,8 @@ class LV1 extends Phaser.Scene{
             this.enemy7.death();
 
             //text display for game over
-            this.display.text = 'The lights has been blew off \nyou are dragged into the endless darkness \n press F to restart this level';
-            if(keyF.isDown){
+            this.display.text = 'The lights has been blew off \nyou are dragged into the endless darkness \n press SPACE to restart this level';
+            if(keySpace.isDown){
                 this.scene.start('Lv1');
             }
         }
@@ -453,60 +464,36 @@ class LV1 extends Phaser.Scene{
         if(enemySum > 0){
 
             if(this.physics.overlap(this.enemy0, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food0.drop(this.enemy0.x, this.enemy0.y);
-                }
-                this.enemy0.reset();
+                //this.foodDrop(this.food0, this.enemy0);
+                this.enemy0.resetKill(this.food0, this.enemy0);
             }
             if(this.physics.overlap(this.enemy1, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food1.drop(this.enemy1.x, this.enemy1.y);
-                }
-                this.enemy1.reset();
+                //this.foodDrop(this.food1, this.enemy1);
+                this.enemy1.resetKill(this.food1, this.enemy1);
             }
             if(this.physics.overlap(this.enemy2, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food2.drop(this.enemy2.x, this.enemy2.y);
-                }
-                this.enemy2.reset();
+                //this.foodDrop(this.food2, this.enemy2);
+                this.enemy2.resetKill(this.food2, this.enemy2);
             }
             if(this.physics.overlap(this.enemy3, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food3.drop(this.enemy3.x, this.enemy3.y);
-                }
-                this.enemy3.reset();
+                //this.foodDrop(this.food3, this.enemy3);
+                this.enemy3.resetKill(this.food3, this.enemy3);
             }
             if(this.physics.overlap(this.enemy4, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food4.drop(this.enemy4.x, this.enemy4.y);
-                }
-                this.enemy4.reset();
+                //this.foodDrop(this.food4, this.enemy4);
+                this.enemy4.resetKill(this.food4, this.enemy4);
             }
             if(this.physics.overlap(this.enemy5, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food5.drop(this.enemy5.x, this.enemy5.y);
-                }
-                this.enemy5.reset();
+                //this.foodDrop(this.food5, this.enemy5);
+                this.enemy5.resetKill(this.food5, this.enemy5);
             }
             if(this.physics.overlap(this.enemy6, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food6.drop(this.enemy6.x, this.enemy6.y);
-                }
-                this.enemy6.reset();
+                //this.foodDrop(this.food6, this.enemy6);
+                this.enemy6.resetKill(this.food6, this.enemy6);
             }
             if(this.physics.overlap(this.enemy7, hitbox)){
-                if(this.random(1,100) <= 50)
-                {
-                    this.food7.drop(this.enemy7.x, this.enemy7.y);
-                }
-                this.enemy7.reset();
+                //this.foodDrop(this.food7, this.enemy7);
+                this.enemy7.resetKill(this.food7, this.enemy7);
             }
         }
         
@@ -515,37 +502,44 @@ class LV1 extends Phaser.Scene{
     //candle HP
     dmgCandle(){
         if(this.physics.overlap(this.enemy0, this.candle)){
-            this.enemy0.reset();
+            this.enemy0.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy1, this.candle)){
-            this.enemy1.reset();
+            this.enemy1.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy2, this.candle)){
-            this.enemy2.reset();
+            this.enemy2.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy3, this.candle)){
-            this.enemy3.reset();
+            this.enemy3.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy4, this.candle)){
-            this.enemy4.reset();
+            this.enemy4.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy5, this.candle)){
-            this.enemy5.reset();
+            this.enemy5.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy6, this.candle)){
-            this.enemy6.reset();
+            this.enemy6.resetCandle();
             this.candle.dmg();
         }
         if(this.physics.overlap(this.enemy7, this.candle)){
-            this.enemy7.reset();
+            this.enemy7.resetCandle();
             this.candle.dmg();
         }
+    }
+
+    foodDrop(food, enemy){
+        //if(this.random(1,100) <= 50)
+        //    {
+                food.drop(enemy.x, enemy.y);
+        //    }
     }
 
     eatFood(){
@@ -577,6 +571,29 @@ class LV1 extends Phaser.Scene{
             }
 
         }
+    }
+
+    //check spin attack
+    chkAttack(food, enemy){
+
+        if(this.physics.overlap(this.player, enemy) && enemy.isHurt == false){
+            enemy.getHit(food, enemy);
+        }
+
+    }
+
+    //reset getHit status for enemies
+    hitReset(){
+
+        this.enemy0.isHurt = false;
+        this.enemy1.isHurt = false;
+        this.enemy2.isHurt = false;
+        this.enemy3.isHurt = false;
+        this.enemy4.isHurt = false;
+        this.enemy5.isHurt = false;
+        this.enemy6.isHurt = false;
+        this.enemy7.isHurt = false;
+
     }
 
     //order of bomb creation

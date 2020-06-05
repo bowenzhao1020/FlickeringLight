@@ -22,7 +22,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 //key input read
-let keyUp, keyDown, keyLeft, keyRight, keyF, keyG;
+let keyUp, keyDown, keyLeft, keyRight, keyF, keyG, keySpace;
 
 //skill var
 
