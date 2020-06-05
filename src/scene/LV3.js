@@ -52,8 +52,8 @@ class LV3 extends Phaser.Scene{
         candleHP = 10;
 
         //amount of enemy number
-        enemyNorm = 15;
-        enemyFast = 20;
+        enemyNorm = 8;
+        enemyFast = 10;
         enemySum = enemyNorm + enemyFast + enemySlow;
 
         //key inputs

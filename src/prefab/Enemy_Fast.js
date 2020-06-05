@@ -19,7 +19,7 @@ class Fast extends Phaser.Physics.Arcade.Sprite{
 
         this.body.setImmovable(true);
         this.body.onCollide = true;
-        this.moveTo(this, 1600, 1600, 50);
+        this.moveTo(this, 1600, 1600, 100);
         
     }
 
