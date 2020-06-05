@@ -5,8 +5,8 @@ class LV1 extends Phaser.Scene{
 
     preload(){
 
+        //image and sprite sheet load
         this.load.image('player', "./assets/Character.png");
-        //this.load.spritesheet('up', './assets/charUp.png', {frameWidth: , frameHeight: , startFrame: , endFrame: });
         this.load.image('bomb', "./assets/Bomb.png");
         this.load.spritesheet('Candle', './assets/Candle.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 3});
         this.load.spritesheet('Food', './assets/Food.png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 1});
@@ -31,8 +31,10 @@ class LV1 extends Phaser.Scene{
 
     create(){
 
+        //game over setting
         gameOver = false;
 
+        //display config
         let displayConfig = {
             fontFamily: 'Arial',
             fontSize: '30px',
@@ -45,8 +47,10 @@ class LV1 extends Phaser.Scene{
             fixedWidth: 0
         }
 
+        //candle HP for game over check
         candleHP = 8;
 
+        //amount of enemy number
         enemyNorm = 15;
         enemySum = enemyNorm + enemyFast + enemySlow;
 
@@ -207,14 +211,12 @@ class LV1 extends Phaser.Scene{
         cstBounds = new Phaser.Geom.Rectangle(0, 0, 3200, 3200);
         this.player.body.setBoundsRectangle(cstBounds);
 
-        
 
         //UI display
         this.bombUI  = this.add.text(centerX - 320, centerY - 370, 'Bomb: ' + bombNum, displayConfig).setOrigin(0.5);
         this.enemyUI = this.add.text(centerX + 320, centerY - 370, 'Enemy: ' + enemySum, displayConfig).setOrigin(0.5);
         this.HPUI    = this.add.text(centerX      , centerY - 370, 'HP Remain: ' + candleHP, displayConfig).setOrigin(0.5);
         this.display = this.add.text(centerX      , centerY + 300, '', displayConfig).setOrigin(0.5);
-
 
     }
 
@@ -247,8 +249,10 @@ class LV1 extends Phaser.Scene{
             gameOver = true;
         }
 
+        //updates for game not over
         if(gameOver == false){
 
+            //attack checking when spin
             if(keyF.isDown && this.player.atking == false){
                 this.player.body.setVelocityX(0);
                 this.player.body.setVelocityY(0);
@@ -269,9 +273,10 @@ class LV1 extends Phaser.Scene{
                 });
             }
 
-             //player update
+            //player update
             this.player.update();
 
+            //enemy updates for level not over
             if(enemySum > 0)
             {
                 if(!this.enemy0.dead){
@@ -464,35 +469,27 @@ class LV1 extends Phaser.Scene{
         if(enemySum > 0){
 
             if(this.physics.overlap(this.enemy0, hitbox)){
-                //this.foodDrop(this.food0, this.enemy0);
                 this.enemy0.resetKill(this.food0, this.enemy0);
             }
             if(this.physics.overlap(this.enemy1, hitbox)){
-                //this.foodDrop(this.food1, this.enemy1);
                 this.enemy1.resetKill(this.food1, this.enemy1);
             }
             if(this.physics.overlap(this.enemy2, hitbox)){
-                //this.foodDrop(this.food2, this.enemy2);
                 this.enemy2.resetKill(this.food2, this.enemy2);
             }
             if(this.physics.overlap(this.enemy3, hitbox)){
-                //this.foodDrop(this.food3, this.enemy3);
                 this.enemy3.resetKill(this.food3, this.enemy3);
             }
             if(this.physics.overlap(this.enemy4, hitbox)){
-                //this.foodDrop(this.food4, this.enemy4);
                 this.enemy4.resetKill(this.food4, this.enemy4);
             }
             if(this.physics.overlap(this.enemy5, hitbox)){
-                //this.foodDrop(this.food5, this.enemy5);
                 this.enemy5.resetKill(this.food5, this.enemy5);
             }
             if(this.physics.overlap(this.enemy6, hitbox)){
-                //this.foodDrop(this.food6, this.enemy6);
                 this.enemy6.resetKill(this.food6, this.enemy6);
             }
             if(this.physics.overlap(this.enemy7, hitbox)){
-                //this.foodDrop(this.food7, this.enemy7);
                 this.enemy7.resetKill(this.food7, this.enemy7);
             }
         }
@@ -535,13 +532,15 @@ class LV1 extends Phaser.Scene{
         }
     }
 
+    //food drop upon enemy death
     foodDrop(food, enemy){
-        //if(this.random(1,100) <= 50)
-        //    {
+        if(this.random(1,100) <= 50)
+            {
                 food.drop(enemy.x, enemy.y);
-        //    }
+            }
     }
 
+    //food consume for bomb 
     eatFood(){
         if(bombNum < 10){
 
@@ -600,61 +599,51 @@ class LV1 extends Phaser.Scene{
     bombOrder(){
         if(Phaser.Input.Keyboard.JustDown(keyG) && bombNum > 0){
             if(this.boom0.isCreate == false){
-                console.log('boom0');
                 this.setBomb(this.boom0);
                 this.boom0.activate();
             }
             else if(this.boom1.isCreate == false && this.boom0.isCreate == true){
-                console.log('boom1');
                 this.setBomb(this.boom1);
                 this.boom1.activate();
             }
             else if(this.boom2.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true){
-                console.log('boom2');
                 this.setBomb(this.boom2);
                 this.boom2.activate();
             }
             else if(this.boom3.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true){
-                console.log('boom3');
                 this.setBomb(this.boom3);
                 this.boom3.activate();
             }
             else if(this.boom4.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true 
                                                 && this.boom2.isCreate == true && this.boom3.isCreate == true){
-                console.log('boom4');
                 this.setBomb(this.boom4);
                 this.boom4.activate();
             }
             else if(this.boom5.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true){
-                console.log('boom5');
                 this.setBomb(this.boom5);
                 this.boom5.activate();
             }
             else if(this.boom6.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true){
-                console.log('boom6');
                 this.setBomb(this.boom6);
                 this.boom6.activate();
             }
             else if(this.boom7.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
                                                 && this.boom6.isCreate == true){
-                console.log('boom7');
                 this.setBomb(this.boom7);
                 this.boom7.activate();
             }
             else if(this.boom8.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
                                                 && this.boom6.isCreate == true && this.boom7.isCreate == true){
-                console.log('boom8');
                 this.setBomb(this.boom8);
                 this.boom8.activate();
             }
             else if(this.boom9.isCreate == false && this.boom0.isCreate == true && this.boom1.isCreate == true && this.boom2.isCreate == true
                                                 && this.boom3.isCreate == true && this.boom4.isCreate == true && this.boom5.isCreate == true
                                                 && this.boom6.isCreate == true && this.boom7.isCreate == true && this.boom8.isCreate == true){
-                console.log('boom9');
                 this.setBomb(this.boom9);
                 this.boom9.activate();
             }
