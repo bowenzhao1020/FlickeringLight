@@ -34,7 +34,7 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        this.add.text(centerX, centerY - 300, 'Unknown', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY - 300, 'Flickering Light', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 300, 'Press SPACE bar To Start', infoConfig).setOrigin(0.5);
 
         //F key scene change
