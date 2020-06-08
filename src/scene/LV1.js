@@ -14,6 +14,9 @@ class LV1 extends Phaser.Scene{
         this.load.spritesheet('spinATK', './assets/SpinATK.png', {frameWidth: 96, frameHeight: 128, startFrame: 0, endFrame: 9});
         this.load.spritesheet('normal', './assets/GhostNorm.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 1});
         this.load.spritesheet('fast', './assets/GhostFast.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 1});
+        
+        //Load Sound
+        this.sfxExplosion = scene.sound.add('Boom');
 
         //image for game over
         this.load.image('gameOver', "./assets/GameOver.png");
@@ -117,6 +120,7 @@ class LV1 extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('Explosion', { frames: [0, 1] }),
             frameRate: 10,
             repeat: -1,
+            this.sfxExplosion.play();
         });
 
         this.anims.create({
