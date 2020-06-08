@@ -4,12 +4,20 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
+<<<<<<< HEAD
         //load bgm
         this.load.audio('playBgm', './assets/BGM.mp3');
 
+=======
+        //menu art load
+        this.load.image('menuArt', "./assets/Menu.png");
+>>>>>>> 3bf0ff5a683947c69363559cc579ac471377a41c
     }
 
     create(){
+        //menu art implement
+        this.add.tileSprite(centerX, centerY, 800, 800, 'menuArt').setOrigin(0.5);
+
         //menu display
         let menuConfig = {
             fontFamily: 'Arial',
@@ -36,6 +44,7 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }
 
+<<<<<<< HEAD
         this.playBgm = this.sound.add('playBgm', {
             mute: false,
             volume: 0.5,
@@ -44,6 +53,9 @@ class Menu extends Phaser.Scene{
         });
         this.playBgm.play();
 
+=======
+        //this.add.text(centerX, centerY - 300, 'Flickering Light', menuConfig).setOrigin(0.5);
+>>>>>>> 3bf0ff5a683947c69363559cc579ac471377a41c
         this.add.text(centerX, centerY + 300, 'Press SPACE bar To Start', infoConfig).setOrigin(0.5);
 
         //F key scene change
