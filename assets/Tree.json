@@ -1,4 +1,12 @@
 { "columns":2,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"Tree.json"
+        }
+    },
  "image":"Tree.png",
  "imageheight":96,
  "imagewidth":64,
