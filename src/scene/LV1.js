@@ -217,6 +217,10 @@ class LV1 extends Phaser.Scene{
         this.HPUI    = this.add.text(centerX      , centerY - 370, 'HP Remain: ' + candleHP, displayConfig).setOrigin(0.5);
         this.display = this.add.text(centerX      , centerY + 300, '', displayConfig).setOrigin(0.5);
 
+        //gameOver art
+        this.over = this.add.sprite(centerX, centerY, 'gameOver').setOrigin(0.5);
+        this.over.setVisible(false);
+
     }
 
 
@@ -228,6 +232,7 @@ class LV1 extends Phaser.Scene{
         this.enemyUI.setScrollFactor(0);
         this.HPUI.setScrollFactor(0);
         this.display.setScrollFactor(0);
+        this.over.setScrollFactor(0);
 
         //player collision with enemies
         this.physics.overlap(this.player, this.enemy0);
@@ -365,6 +370,9 @@ class LV1 extends Phaser.Scene{
             this.enemy5.death();
             this.enemy6.death();
             this.enemy7.death();
+
+            //game over tile
+            this.over.setVisible(true);
 
             //text display for game over
             this.display.text = 'The lights has been blew off \nyou are dragged into the endless darkness \n press SPACE to restart this level';
