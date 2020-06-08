@@ -17,12 +17,11 @@ class LV1 extends Phaser.Scene{
         
 
         //tile map needs
-        this.load.image('Dirt',   './assets/Dirt.png');
         this.load.image('Tree',   './assets/Tree.png');
         this.load.image('Grass',  './assets/Grass.png');
         this.load.image('Rock',   './assets/Rock.png');
-        this.load.image('Water',  './assets/Water.png');
-        this.load.image('Plants', './assets/Plants.png');
+        //this.load.image('Water',  './assets/Water.png');
+        this.load.image('Plant', './assets/Plant.png');
 
         //json file load
         this.load.tilemapTiledJSON('Gmap', './assets/GameMap.json');
@@ -66,18 +65,17 @@ class LV1 extends Phaser.Scene{
         //game world tile
         Gmap = this.add.tilemap('Gmap');
 
-        dirt   = Gmap.addTilesetImage('Dirt');
+        //dirt   = Gmap.addTilesetImage('Dirt');
         grass  = Gmap.addTilesetImage('Grass');
         tree   = Gmap.addTilesetImage('Tree');
-        plants = Gmap.addTilesetImage('Plants');
-        water  = Gmap.addTilesetImage('Water');
+        plant = Gmap.addTilesetImage('Plant');
+        //water  = Gmap.addTilesetImage('Water');
         rock   = Gmap.addTilesetImage('Rock');
 
         // //layer adding
-        dirtLay  = Gmap.createStaticLayer('Dirt',     [dirt, water], 0, 0).setDepth(-1);
         grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
-        objLay   = Gmap.createStaticLayer('Object',   [tree, rock, plants], 0, 0).setDepth(-1);
-        obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0).setDepth(-1);
+        plantLay   = Gmap.createStaticLayer('PlantGround',   [rock, plant], 0, 0).setDepth(-1);
+        treeLay  = Gmap.createStaticLayer('TreeGround', [tree], 0, 0).setDepth(-1);
 
         //player sprite implement
         this.player = new Player(this, spawnX, spawnY, 'spinATK').setOrigin(0.5);
