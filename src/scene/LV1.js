@@ -14,6 +14,9 @@ class LV1 extends Phaser.Scene{
         this.load.spritesheet('spinATK', './assets/SpinATK.png', {frameWidth: 96, frameHeight: 128, startFrame: 0, endFrame: 9});
         this.load.spritesheet('normal', './assets/GhostNorm.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 1});
         this.load.spritesheet('fast', './assets/GhostFast.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 1});
+
+        //image for game over
+        this.load.image('gameOver', "./assets/GameOver.png");
         
 
         //tile map needs
@@ -29,6 +32,21 @@ class LV1 extends Phaser.Scene{
     }
 
     create(){
+
+        //game world tile
+        Gmap = this.add.tilemap('Gmap');
+
+        //dirt   = Gmap.addTilesetImage('Dirt');
+        grass  = Gmap.addTilesetImage('Grass');
+        tree   = Gmap.addTilesetImage('Tree');
+        plant = Gmap.addTilesetImage('Plant');
+        //water  = Gmap.addTilesetImage('Water');
+        rock   = Gmap.addTilesetImage('Rock');
+
+        // //layer adding
+        grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
+        plantLay   = Gmap.createStaticLayer('PlantGround',   [rock, plant], 0, 0).setDepth(-1);
+        treeLay  = Gmap.createStaticLayer('TreeGround', [tree], 0, 0).setDepth(-1);
 
         //game over setting
         gameOver = false;
@@ -61,21 +79,6 @@ class LV1 extends Phaser.Scene{
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyG      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         keySpace  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
-        //game world tile
-        Gmap = this.add.tilemap('Gmap');
-
-        //dirt   = Gmap.addTilesetImage('Dirt');
-        grass  = Gmap.addTilesetImage('Grass');
-        tree   = Gmap.addTilesetImage('Tree');
-        plant = Gmap.addTilesetImage('Plant');
-        //water  = Gmap.addTilesetImage('Water');
-        rock   = Gmap.addTilesetImage('Rock');
-
-        // //layer adding
-        grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
-        plantLay   = Gmap.createStaticLayer('PlantGround',   [rock, plant], 0, 0).setDepth(-1);
-        treeLay  = Gmap.createStaticLayer('TreeGround', [tree], 0, 0).setDepth(-1);
 
         //player sprite implement
         this.player = new Player(this, spawnX, spawnY, 'spinATK').setOrigin(0.5);

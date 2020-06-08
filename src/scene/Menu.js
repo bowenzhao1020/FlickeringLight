@@ -4,10 +4,14 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
-
+        //menu art load
+        this.load.image('menuArt', "./assets/Menu.png");
     }
 
     create(){
+        //menu art implement
+        this.add.tileSprite(centerX, centerY, 800, 800, 'menuArt').setOrigin(0.5);
+
         //menu display
         let menuConfig = {
             fontFamily: 'Arial',
@@ -34,7 +38,7 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        this.add.text(centerX, centerY - 300, 'Flickering Light', menuConfig).setOrigin(0.5);
+        //this.add.text(centerX, centerY - 300, 'Flickering Light', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 300, 'Press SPACE bar To Start', infoConfig).setOrigin(0.5);
 
         //F key scene change
