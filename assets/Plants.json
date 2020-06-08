@@ -1,9 +1,17 @@
 { "columns":3,
- "image":"Plant.png.png",
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"Plants.json"
+        }
+    },
+ "image":"Plants.png",
  "imageheight":96,
  "imagewidth":96,
  "margin":0,
- "name":"Plant.png",
+ "name":"Plants",
  "spacing":0,
  "tilecount":9,
  "tiledversion":"1.3.4",
