@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"GameMap.json"
+         "format":"json"
         }
     },
  "height":100,
@@ -46,7 +45,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
+ "nextlayerid":5,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -54,20 +53,56 @@
  "tileheight":32,
  "tilesets":[
         {
+         "columns":6,
          "firstgid":1,
-         "source":"Grass.tsx"
+         "image":"Grass.png",
+         "imageheight":384,
+         "imagewidth":192,
+         "margin":0,
+         "name":"Grass",
+         "spacing":0,
+         "tilecount":72,
+         "tileheight":32,
+         "tilewidth":32
         }, 
         {
+         "columns":2,
          "firstgid":73,
-         "source":"Tree.tsx"
+         "image":"Tree.png",
+         "imageheight":96,
+         "imagewidth":64,
+         "margin":0,
+         "name":"Tree",
+         "spacing":0,
+         "tilecount":6,
+         "tileheight":32,
+         "tilewidth":32
         }, 
         {
+         "columns":3,
          "firstgid":79,
-         "source":"Plants.tsx"
+         "image":"Plants.png",
+         "imageheight":96,
+         "imagewidth":96,
+         "margin":0,
+         "name":"Plants",
+         "spacing":0,
+         "tilecount":9,
+         "tileheight":32,
+         "tilewidth":32
         }, 
         {
+         "columns":1,
          "firstgid":88,
-         "source":"Rock.tsx"
+         "image":"Rock.png",
+         "imageheight":32,
+         "imagewidth":32,
+         "margin":0,
+         "name":"Rock",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",

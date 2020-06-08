@@ -17,20 +17,36 @@ class LV3 extends Phaser.Scene{
         this.load.spritesheet('slow', './assets/GhostSlow.png', {frameWidth: 128, frameHeight: 128, startFrame: 0, endFrame: 1});
         
 
+        //image for game over
+        this.load.image('gameOver', "./assets/GameOver.png");
+        
+
         //tile map needs
-        this.load.image('Dirt',   './assets/Dirt.png');
         this.load.image('Tree',   './assets/Tree.png');
         this.load.image('Grass',  './assets/Grass.png');
         this.load.image('Rock',   './assets/Rock.png');
-        this.load.image('Water',  './assets/Water.png');
         this.load.image('Plants', './assets/Plants.png');
 
-        //json file load 
+        //json file load
         this.load.tilemapTiledJSON('Gmap', './assets/GameMap.json');
         
     }
 
     create(){
+
+        //game world tile
+        Gmap = this.add.tilemap('Gmap');
+
+        //assets used for all layers
+        grass  = Gmap.addTilesetImage('Grass');
+        tree   = Gmap.addTilesetImage('Tree');
+        plants = Gmap.addTilesetImage('Plants');
+        rock   = Gmap.addTilesetImage('Rock');
+
+        // //layer adding
+        grassLay = Gmap.createStaticLayer('Grass',         [grass], 0, 0).setDepth(-1);
+        plantLay = Gmap.createStaticLayer('PlantGround',  [tree, plants], 0, 0).setDepth(-1);
+        treeLay  = Gmap.createStaticLayer('TreeGround',    [rock], 0, 0).setDepth(-1);
 
         //game over setting
         gameOver = false;
@@ -64,22 +80,6 @@ class LV3 extends Phaser.Scene{
         keyF      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyG      = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         keySpace  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
-        //game world tile
-        Gmap = this.add.tilemap('Gmap');
-
-        dirt   = Gmap.addTilesetImage('Dirt');
-        grass  = Gmap.addTilesetImage('Grass');
-        tree   = Gmap.addTilesetImage('Tree');
-        plants = Gmap.addTilesetImage('Plants');
-        water  = Gmap.addTilesetImage('Water');
-        rock   = Gmap.addTilesetImage('Rock');
-
-        // //layer adding
-        dirtLay  = Gmap.createStaticLayer('Dirt',     [dirt, water], 0, 0).setDepth(-1);
-        grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
-        objLay   = Gmap.createStaticLayer('Object',   [tree, rock, plants], 0, 0).setDepth(-1);
-        obj2Lay  = Gmap.createStaticLayer('Object 2', [tree, rock, plants], 0, 0).setDepth(-1);
 
         //player sprite implement
         this.player = new Player(this, spawnX, spawnY, 'spinATK').setOrigin(0.5);
@@ -227,6 +227,10 @@ class LV3 extends Phaser.Scene{
         this.HPUI    = this.add.text(centerX      , centerY - 370, 'HP Remain: ' + candleHP, displayConfig).setOrigin(0.5);
         this.display = this.add.text(centerX      , centerY + 300, '', displayConfig).setOrigin(0.5);
 
+        //gameOver art
+        this.over = this.add.sprite(centerX, centerY, 'gameOver').setOrigin(0.5);
+        this.over.setVisible(false);
+
     }
 
 
@@ -238,6 +242,7 @@ class LV3 extends Phaser.Scene{
         this.enemyUI.setScrollFactor(0);
         this.HPUI.setScrollFactor(0);
         this.display.setScrollFactor(0);
+        this.over.setScrollFactor(0);
 
         //player collision with enemies
         this.physics.overlap(this.player, this.enemy0);
@@ -375,6 +380,9 @@ class LV3 extends Phaser.Scene{
             this.enemy5.death();
             this.enemy6.death();
             this.enemy7.death();
+
+            //game over tile
+            this.over.setVisible(true);
 
             //text display for game over
             this.display.text = 'The lights has been blew off \nyou are dragged into the endless darkness \n press SPACE to restart this level';

@@ -42,9 +42,9 @@ class LV1 extends Phaser.Scene{
         rock   = Gmap.addTilesetImage('Rock');
 
         // //layer adding
-        grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
-        plantLay   = Gmap.createStaticLayer('PlantGround',   [tree, plants], 0, 0).setDepth(-1);
-        treeLay  = Gmap.createStaticLayer('TreeGround', [rock], 0, 0).setDepth(-1);
+        grassLay = Gmap.createStaticLayer('Grass',         [grass], 0, 0).setDepth(-1);
+        plantLay = Gmap.createStaticLayer('PlantGround',  [tree, plants], 0, 0).setDepth(-1);
+        treeLay  = Gmap.createStaticLayer('TreeGround',    [rock], 0, 0).setDepth(-1);
 
         //game over setting
         gameOver = false;

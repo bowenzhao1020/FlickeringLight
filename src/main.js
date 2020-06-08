@@ -27,7 +27,7 @@ let config = {
         }
 
     },
-    scene:[ Menu, Instru, LV1, LV2, LV3, LV4, LV5, Over, Credit],
+    scene:[ Menu, Instru, LV1, LV2, LV3, LV4, LV5, Over, Credit ],
 };
 
 let game = new Phaser.Game(config);
@@ -50,7 +50,7 @@ let cstBounds;
 let Gmap, dirt, grass, tree, plants, water, rock;
 
 //tile layer
-let dirtLay, grassLay, objLay, obj2Lay;
+let grassLay, plantLay, treeLay;
 
 //player skill key
 let bombNum = 10;
