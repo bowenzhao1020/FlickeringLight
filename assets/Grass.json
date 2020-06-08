@@ -1,12 +1,4 @@
 { "columns":6,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"Grass.json"
-        }
-    },
  "image":"Grass.png",
  "imageheight":384,
  "imagewidth":192,

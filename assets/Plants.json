@@ -1,12 +1,4 @@
 { "columns":3,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"Plants.json"
-        }
-    },
  "image":"Plants.png",
  "imageheight":96,
  "imagewidth":96,
