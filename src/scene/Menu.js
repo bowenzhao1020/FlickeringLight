@@ -6,6 +6,9 @@ class Menu extends Phaser.Scene{
     preload(){
         //load bgm
         this.load.audio('playBgm', './assets/BGM.mp3');
+        this.load.audio('Boom', './assets/Explosion.flac');
+        this.load.audio('Swing', './assets/Swing.wav');
+        this.load.audio('Death', './assets/Monster.wav');
 
         //menu art load
         this.load.image('menuArt', "./assets/Menu.png");
