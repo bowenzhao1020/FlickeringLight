@@ -23,8 +23,7 @@ class LV1 extends Phaser.Scene{
         this.load.image('Tree',   './assets/Tree.png');
         this.load.image('Grass',  './assets/Grass.png');
         this.load.image('Rock',   './assets/Rock.png');
-        //this.load.image('Water',  './assets/Water.png');
-        this.load.image('Plant', './assets/Plant.png');
+        this.load.image('Plants', './assets/Plants.png');
 
         //json file load
         this.load.tilemapTiledJSON('Gmap', './assets/GameMap.json');
@@ -36,17 +35,16 @@ class LV1 extends Phaser.Scene{
         //game world tile
         Gmap = this.add.tilemap('Gmap');
 
-        //dirt   = Gmap.addTilesetImage('Dirt');
+        //assets used for all layers
         grass  = Gmap.addTilesetImage('Grass');
         tree   = Gmap.addTilesetImage('Tree');
-        plant = Gmap.addTilesetImage('Plant');
-        //water  = Gmap.addTilesetImage('Water');
+        plants = Gmap.addTilesetImage('Plants');
         rock   = Gmap.addTilesetImage('Rock');
 
         // //layer adding
         grassLay = Gmap.createStaticLayer('Grass',    [grass], 0, 0).setDepth(-1);
-        plantLay   = Gmap.createStaticLayer('PlantGround',   [rock, plant], 0, 0).setDepth(-1);
-        treeLay  = Gmap.createStaticLayer('TreeGround', [tree], 0, 0).setDepth(-1);
+        plantLay   = Gmap.createStaticLayer('PlantGround',   [tree, plants], 0, 0).setDepth(-1);
+        treeLay  = Gmap.createStaticLayer('TreeGround', [rock], 0, 0).setDepth(-1);
 
         //game over setting
         gameOver = false;

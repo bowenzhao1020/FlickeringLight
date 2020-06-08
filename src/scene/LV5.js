@@ -360,7 +360,7 @@ class LV5 extends Phaser.Scene{
             //text display for level complete
             this.display.text = 'You have survived tonight \n collect your food and have a rest \npress SPACE to continue to the next night';
             if(keySpace.isDown){
-                this.scene.start('Over');
+                this.scene.start('overScene');
             }
         }
         //game over condition

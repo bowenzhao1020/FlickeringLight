@@ -1,17 +1,16 @@
-class Over extends Phaser.Scene{
+class Instru extends Phaser.Scene{
     constructor(){
-        super("overScene");
+        super("instruScene");
     }
 
     preload(){
-
-        this.load.image('victoryArt', "./assets/Victory.png");
-
+        //instruction art load
+        this.load.image('instruArt', "./assets/Scene2.png");
     }
 
     create(){
-
-        this.add.tileSprite(centerX, centerY, 800, 800, 'victoryArt').setOrigin(0.5);
+        //instruction art implement
+        this.add.tileSprite(centerX, centerY, 800, 800, 'instruArt').setOrigin(0.5);
 
         // information display
         let infoConfig = {
@@ -26,7 +25,7 @@ class Over extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        this.add.text(centerX, centerY + 300, 'Press SPACE to Credit page', infoConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 300, 'Press SPACE bar Flush', infoConfig).setOrigin(0.5);
 
         //space key scene change
         this.key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -35,9 +34,7 @@ class Over extends Phaser.Scene{
     update(){
         // play scene change
         if(this.key.isDown){
-            this.scene.start("creditScene");
+            this.scene.start("Lv1");
         }
     }
-
-
 }

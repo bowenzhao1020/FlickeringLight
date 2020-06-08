@@ -12,19 +12,6 @@ class Menu extends Phaser.Scene{
         //menu art implement
         this.add.tileSprite(centerX, centerY, 800, 800, 'menuArt').setOrigin(0.5);
 
-        //menu display
-        let menuConfig = {
-            fontFamily: 'Arial',
-            fontSize: '50px',
-            color: '#FFFFFF',
-            align: 'left',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-
         // information display
         let infoConfig = {
             fontFamily: 'Arial',
@@ -38,7 +25,6 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        //this.add.text(centerX, centerY - 300, 'Flickering Light', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 300, 'Press SPACE bar To Start', infoConfig).setOrigin(0.5);
 
         //F key scene change
@@ -48,7 +34,7 @@ class Menu extends Phaser.Scene{
     update(){
         // play scene change
         if(this.key.isDown){
-            this.scene.start("Lv1");
+            this.scene.start("instruScene");
         }
     }
 }
