@@ -363,7 +363,7 @@ class LV5 extends Phaser.Scene{
             this.enemy7.death();
 
             //text display for level complete
-            this.display.text = 'You have survived tonight \n collect your food and have a rest \npress SPACE to continue to the next night';
+            this.display.text = 'You have survived tonight \n collect your food and have a rest \npress SPACE to Flush Back';
             if(keySpace.isDown){
                 this.scene.start('overScene');
             }
