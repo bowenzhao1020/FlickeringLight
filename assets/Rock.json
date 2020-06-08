@@ -1,12 +1,4 @@
 { "columns":1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"Rock.json"
-        }
-    },
  "image":"Rock.png",
  "imageheight":32,
  "imagewidth":32,

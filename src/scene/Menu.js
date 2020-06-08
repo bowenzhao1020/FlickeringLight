@@ -4,6 +4,8 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
+        //load bgm
+        this.load.audio('playBgm', './assets/BGM.mp3');
 
     }
 
@@ -34,7 +36,14 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        this.add.text(centerX, centerY - 300, 'Flickering Light', menuConfig).setOrigin(0.5);
+        this.playBgm = this.sound.add('playBgm', {
+            mute: false,
+            volume: 0.5,
+            rate: 1,
+            loop: true
+        });
+        this.playBgm.play();
+
         this.add.text(centerX, centerY + 300, 'Press SPACE bar To Start', infoConfig).setOrigin(0.5);
 
         //F key scene change
